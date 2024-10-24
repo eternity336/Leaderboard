@@ -1,0 +1,24 @@
+<!doctype html>
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/styles.css')}}"/>
+<link rel="icon" type="image/icon" href="{{url_for('static',filename='images/leaderboardicon.png')}}"/>
+
+<title>Welcome to the Leaderboard</title>
+<H1 class="center banner">Welcome to the Leaderboard</H1>
+</div>
+<div class="server_body">    
+    <div class="padding center">
+        <label class="center title">Players/Teams</label>
+        <table class='showplayerstable'>
+            <thead>
+            <tr>
+                <th>Player/Team Name</th> 
+                <th>Score</th>
+            </tr>
+            </thead>
+            <tbody id='players'>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="{{url_for('static', filename='scripts/home.js')}}"></script>
