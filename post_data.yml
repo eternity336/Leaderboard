@@ -1,8 +1,0 @@
-# Create an item via API
-- name: Send Player/Team Data to Leaderboard
-  uri: 
-    url: "{{ url }}/create"
-    method: POST
-    return_content: yes
-    body: "{{ data }}"
-    body_format: json
