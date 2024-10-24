@@ -1,6 +1,6 @@
 # Simple Leaderboard Server
 
-![image]()
+![image](https://github.com/eternity336/Leaderboard/blob/main/screenshot/ScreenshotLeaderboard.png)
 
 
 Intended as a simple Leaderboard server.  This is not inherently secure and I would not advise making this public facing.  However it will work great internally.  It was built with Python, HTML, JQuery and Javascript.
