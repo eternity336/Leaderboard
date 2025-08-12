@@ -5,7 +5,7 @@ function delTable(name){
     $(`#${name}`).empty();
 }
 
-function create_player_row(player, tasks) {
+function create_player_row(player_name, player_score, tasks) {
     if (!tasks || !Array.isArray(tasks)) {
         console.error("Tasks array is not defined or invalid");
         return;
@@ -13,13 +13,21 @@ function create_player_row(player, tasks) {
 
     var playertable = document.getElementById('players');
     var row = playertable.insertRow(-1);
-    row.id = `player-${player}`;
+    row.id = `player-${player_name}`;
 
-    // Add other cells as needed
+    // Add player name cell
+    var nameCell = row.insertCell(0);
+    nameCell.innerHTML = player_name;
 
+    // Add total score cell
+    var scoreCell = row.insertCell(1);
+    scoreCell.innerHTML = player_score;
+
+    // Add task cells
     for (let i = 0; i < tasks.length; i++) {
-        let taskCell = row.insertCell(i + 2);  // Assuming player name and total score take up the first two cells
-        taskCell.id = `task-${i}`;
+        let taskCell = row.insertCell(i + 2);  // Task cells start from index 2
+        taskCell.id = `task-${player_name}-${i}`;
+        taskCell.innerHTML = player_score; // For now, show total score in each task cell
     }
 }
 
@@ -27,31 +35,7 @@ function addPlayers(players, tasks) {
     console.log('online', players);
     for (let i = 0; i < players.length; i++) {
         let playerRow = players[i].split(', ');
-        create_player_row(playerRow[0], tasks);  // Use player name as the identifier
-        addScoreCells(playerRow[1], tasks);
-    }
-}
-
-function addScoreCells(score, tasks) {
-    if (!tasks || !Array.isArray(tasks)) {
-        console.error("Tasks array is not defined or invalid");
-        return;
-    }
-
-    // Since the backend returns simple strings like "joshua, 23", 
-    // we need to handle this differently
-    // The score here is just a number, not JSON with a score property
-    
-    for (let i = 0; i < tasks.length; i++) {
-        let taskCell = document.getElementById(`task-${i}`);
-        if (taskCell) {
-            // For now, we'll just show the total score in each task cell
-            // This is a simplification - in a real app you'd want to parse 
-            // actual task scores from the player data
-            taskCell.innerHTML = score;
-        } else {
-            console.error(`Task cell with id 'task-${i}' not found`);
-        }
+        create_player_row(playerRow[0], playerRow[1], tasks);  // Use player name and score
     }
 }
 
@@ -67,6 +51,7 @@ function refreshData() {
     });
 }
 
+// Initialize the refresh interval
 if (interval_timer == ""){
     interval_timer = setInterval(function() {
         refreshData();
