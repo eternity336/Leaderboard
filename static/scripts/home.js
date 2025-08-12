@@ -27,7 +27,7 @@ function create_player_row(player_name, player_score, tasks) {
     for (let i = 0; i < tasks.length; i++) {
         let taskCell = row.insertCell(i + 2);  // Task cells start from index 2
         taskCell.id = `task-${player_name}-${i}`;
-        taskCell.innerHTML = player_score; // For now, show total score in each task cell
+        taskCell.innerHTML = "0"; // Initialize with 0, will be updated by backend data
     }
 }
 
@@ -46,8 +46,12 @@ function refreshData() {
     }).done(function(data) {
         console.log('Received Data:', data);  
         delTable('players');
-        tasks = data.data.tasks; // Set the global tasks variable
+        if (data.data && data.data.tasks) {
+            tasks = data.data.tasks; // Set the global tasks variable
+        }
         addPlayers(data.data.players, tasks);
+    }).fail(function(xhr, status, error) {
+        console.error('Failed to fetch data:', error);
     });
 }
 
