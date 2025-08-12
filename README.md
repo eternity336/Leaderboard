@@ -82,9 +82,54 @@ and then run with waitress since gunicorn doesn't work on Windows.
 
     waitress-serve --listen=*:8000 app:app
 
+### Configuration
+
+To configure the leaderboard, you can use a YAML file named `config.yaml`. Here is an example configuration:
+
+```yaml
+leaderboard:
+  tasks:
+    - name: Task 1
+      weight: 20
+    - name: Task 2
+      weight: 30
+    - name: Task 3
+      weight: 50
+
+display_name_field: "name"
+score_fields: ["task_1", "task_2", "task_3"]
+```
+
+### Usage
+
+To push player data to the server, use the following cURL command:
+
+```bash
+curl --location 'localhost:8000/update_players' --header 'Content-Type: application/json' --data '["joshua, 100","john, 316","sam, 56"]'
+```
+
+### Running Locally
+
+To run the application locally:
+
+- Install Python 3.9
+- Install dependencies using `pip install -r requirements.txt`
+- Start the server using Gunicorn: `gunicorn --bind 0.0.0.0:8000 app:app`
+
+### Docker Setup
+
+For a Docker-based setup:
+
+1. Ensure you have Docker and Docker Compose installed.
+2. Navigate to your project directory containing `docker-compose.yml` and `Dockerfile`.
+3. Run `docker-compose up` to build and start the container.
+
+The application will be accessible at http://localhost:8080
+
 ---REFERENCES---
 
 Font from 
 
 https://www.1001fonts.com/saiba-45-font.html
 ```
+

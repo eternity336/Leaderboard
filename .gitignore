@@ -1,5 +1,5 @@
-config.yaml
 *.env
 __*
 *.db*
 leaderenv
+.aider*
