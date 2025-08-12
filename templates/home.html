@@ -5,15 +5,17 @@
 
 <title>Welcome to the Leaderboard</title>
 <H1 class="center banner">Welcome to the Leaderboard</H1>
-</div>
 <div class="server_body">    
     <div class="padding center">
         <label class="center title">Players/Teams</label>
         <table class='showplayerstable'>
             <thead>
             <tr>
-                <th>Player/Team Name</th> 
-                <th>Score</th>
+                <th>Player/Team Name</th>
+                {% for task in tasks %}
+                <th>{{ task['name'] }}</th>
+                {% endfor %}
+                <th>Total Score</th>
             </tr>
             </thead>
             <tbody id='players'>
