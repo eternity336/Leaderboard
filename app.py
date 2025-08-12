@@ -43,27 +43,50 @@ def update_players():
     global players
     print(players)
     
-    # Print the incoming JSON payload for debugging
+    # Get JSON payload
     new_players = request.get_json()
     print('Incoming JSON Payload:', new_players)
 
-    # Validate and convert input data
-    for player in new_players:
-        if display_name_field not in player or any(field not in player for field in score_fields):
+    # Validate input
+    if not isinstance(new_players, list):
+        return jsonify({'error': 'Expected a list of players'}), 400
+
+    # Process each player in the payload
+    for player_data in new_players:
+        if display_name_field not in player_data:
             continue
+            
+        player_name = player_data[display_name_field]
         
-        player_id = player[display_name_field]
-        
+        # Create task scores dictionary
         task_scores = {}
-        for task, field in zip(tasks, score_fields):
-            task_score = int(player.get(field, 0))  # Get the score from player dictionary
-            if task_score > 0:
-                task_scores[task['name']] = task_score
+        for i, task in enumerate(tasks):
+            task_name = task['name']
+            # Look for score in the player data using either the task name or score field
+            if task_name in player_data:
+                task_scores[task_name] = int(player_data[task_name])
+            elif score_fields[i] in player_data:
+                task_scores[task_name] = int(player_data[score_fields[i]])
         
-        # Convert task scores to integers and calculate total score
-        player_score = sum(task_scores.get(task['name'], 0) * task['weight'] / 100 for task in tasks)
+        # Calculate total score based on weights
+        total_score = 0
+        for task in tasks:
+            task_name = task['name']
+            if task_name in task_scores:
+                total_score += (task_scores[task_name] * task['weight']) / 100
         
-        players.append(f"{player_id}, {int(player_score)}")
+        # Update or add player
+        player_found = False
+        for i, player in enumerate(players):
+            if player.startswith(f"{player_name},"):
+                # Update existing player
+                players[i] = f"{player_name}, {int(total_score)}"
+                player_found = True
+                break
+                
+        if not player_found:
+            # Add new player
+            players.append(f"{player_name}, {int(total_score)}")
 
     print(players)
     message = {
@@ -76,8 +99,11 @@ def update_players():
 
 # Define a function to extract the second value from each string
 def extract_second_value(item):
-    # Split the string by comma and return the second part
-    return int(item.split(',')[1])
+    # Split the string by comma and return the second part (score)
+    try:
+        return int(item.split(',')[1])
+    except (IndexError, ValueError):
+        return 0
 
 def sorted_list_of_players():
     global players
