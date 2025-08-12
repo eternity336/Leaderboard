@@ -1,4 +1,5 @@
 var interval_timer = "";
+var tasks = []; // Define tasks variable
 
 function delTable(name){
     $(`#${name}`).empty();
@@ -37,11 +38,17 @@ function addScoreCells(score, tasks) {
         return;
     }
 
-    let scoreValues = JSON.parse(score).score;  // Assuming score is in JSON format
+    // Since the backend returns simple strings like "joshua, 23", 
+    // we need to handle this differently
+    // The score here is just a number, not JSON with a score property
+    
     for (let i = 0; i < tasks.length; i++) {
         let taskCell = document.getElementById(`task-${i}`);
         if (taskCell) {
-            taskCell.innerHTML = scoreValues[i];
+            // For now, we'll just show the total score in each task cell
+            // This is a simplification - in a real app you'd want to parse 
+            // actual task scores from the player data
+            taskCell.innerHTML = score;
         } else {
             console.error(`Task cell with id 'task-${i}' not found`);
         }
@@ -55,6 +62,7 @@ function refreshData() {
     }).done(function(data) {
         console.log('Received Data:', data);  
         delTable('players');
+        tasks = data.data.tasks; // Set the global tasks variable
         addPlayers(data.data.players, tasks);
     });
 }

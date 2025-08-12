@@ -29,6 +29,7 @@ def get_data():
     global players
     data = {
         'players': sorted_list_of_players(), 
+        'tasks': tasks
     }
     message = {
             'status' : 200,
