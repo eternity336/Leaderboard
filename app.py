@@ -40,7 +40,6 @@ def get_data():
     resp = jsonify(message)                                                                                              
     return resp                                                                                                          
 
-@app.route("/update_players", methods=['POST'])                                                                          
 def update_players():                                                                                                    
     global players                                                                                                       
     print(players)                                                                                                       
@@ -105,7 +104,14 @@ def extract_second_value(item):
 
 def sorted_list_of_players():                                                                                            
     global players                                                                                                       
-    return sorted(players, key=extract_second_value, reverse=True)                                                       
+    # Parse player data to extract name and score for sorting
+    def extract_score(player_str):
+        try:
+            return int(player_str.split(', ')[1])
+        except (IndexError, ValueError):
+            return 0
+    
+    return sorted(players, key=extract_score, reverse=True)                                                       
 
 if __name__ == "__main__":                                                                                               
-    app.run(debug=True) 
+    app.run(debug=True)

@@ -19,16 +19,16 @@ function create_player_row(player_name, player_score, tasks) {
     var nameCell = row.insertCell(0);
     nameCell.innerHTML = player_name;
 
-    // Add total score cell
-    var scoreCell = row.insertCell(1);
-    scoreCell.innerHTML = player_score;
-
-    // Add task cells
+    // Add task cells (skip first two columns for name and total)
     for (let i = 0; i < tasks.length; i++) {
-        let taskCell = row.insertCell(i + 2);  // Task cells start from index 2
+        let taskCell = row.insertCell(i + 1);  // Task cells start from index 1
         taskCell.id = `task-${player_name}-${i}`;
         taskCell.innerHTML = "0"; // Initialize with 0, will be updated by backend data
     }
+
+    // Add total score cell at the end
+    var scoreCell = row.insertCell(tasks.length + 1);
+    scoreCell.innerHTML = player_score;
 }
 
 function addPlayers(players, tasks) {
