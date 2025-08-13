@@ -15,7 +15,9 @@ except FileNotFoundError:
     print("config.yaml not found. Using default configuration.")                                                         
     tasks = []                                                                                                           
     display_name_field = "name"                                                                                          
-    score_fields = []                                                                                                    
+    score_fields = []            
+
+print(tasks, display_name_field, score_fields)                                                                                        
 @app.route("/")                                                                                                          
 def home():                                                                                                              
     ## Homepage for Leaderboard                                                                                          
@@ -62,8 +64,9 @@ def update_players():
                 task_scores[task_name] = int(player_data[task_name])                                                     
             elif len(score_fields) > i and score_fields[i] in player_data:                                               
                 task_scores[task_name] = int(player_data[score_fields[i]])                                               
+        print("Tasks Scores:", task_scores)
 
-        # Calculate total score based on weights                                                                         
+        # Calculate total score based on weights
         total_score = 0                                                                                                  
         for task in tasks:                                                                                               
             task_name = task['name']                                                                                     
