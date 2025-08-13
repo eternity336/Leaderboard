@@ -19,7 +19,7 @@ function create_player_row(player_name, player_score, tasks) {
     var nameCell = row.insertCell(0);
     nameCell.innerHTML = player_name;
 
-    // Add task cells (skip first two columns for name and total)
+    // Add task cells (skip first column for name)
     for (let i = 0; i < tasks.length; i++) {
         let taskCell = row.insertCell(i + 1);  // Task cells start from index 1
         taskCell.id = `task-${player_name}-${i}`;

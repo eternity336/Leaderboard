@@ -57,22 +57,24 @@ def update_players():
         player_name = player_data[display_name_field]                                                                    
         # Create task scores dictionary                                                                                  
         task_scores = {}                                                                                                 
+        total_score = 0                                                                                                  
+                                                                                                                         
         for i, task in enumerate(tasks):                                                                                 
             task_name = task['name']                                                                                     
-            # Look for score in the player data using either the task name or score field                                
+            # Look for score using either direct field match or score_fields mapping                                
             if task_name in player_data:                                                                                 
-                task_scores[task_name] = int(player_data[task_name])                                                     
+                score = int(player_data[task_name])                                                                      
+                task_scores[task_name] = score                                                                           
+                total_score += (score * task['weight']) / 100                                                           
             elif len(score_fields) > i and score_fields[i] in player_data:                                               
-                task_scores[task_name] = int(player_data[score_fields[i]])                                               
-        print("Tasks Scores:", task_scores)
-
-        # Calculate total score based on weights
-        total_score = 0                                                                                                  
-        for task in tasks:                                                                                               
-            task_name = task['name']                                                                                     
-            if task_name in task_scores:                                                                                 
-                total_score += (task_scores[task_name] * task['weight']) / 100                                           
-
+                score = int(player_data[score_fields[i]])                                                                
+                task_scores[task_name] = score                                                                           
+                total_score += (score * task['weight']) / 100                                                           
+            else:                                                                                                        
+                task_scores[task_name] = 0                                                                               
+                                                                                                                         
+        print("Tasks Scores:", task_scores)                                                                              
+                                                                                                                         
         # Update or add player                                                                                           
         player_found = False                                                                                             
         for i, player in enumerate(players):                                                                             
@@ -81,7 +83,7 @@ def update_players():
                 players[i] = f"{player_name}, {int(total_score)}"                                                        
                 player_found = True                                                                                      
                 break                                                                                                    
-
+                                                                                                                         
         if not player_found:                                                                                             
             # Add new player                                                                                             
             players.append(f"{player_name}, {int(total_score)}")                                                         
