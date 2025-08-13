@@ -40,6 +40,7 @@ def get_data():
     resp = jsonify(message)                                                                                              
     return resp                                                                                                          
 
+@app.route("/update_players", methods=["POST"])                                                                                  
 def update_players():                                                                                                    
     global players                                                                                                       
     print(players)                                                                                                       
