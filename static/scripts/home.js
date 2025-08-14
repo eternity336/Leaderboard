@@ -50,9 +50,23 @@ function refreshData() {
             tasks = data.data.tasks; // Set the global tasks variable
         }
         addPlayers(data.data.players, tasks);
+        
+        // Update task scores for each player
+        updateTaskScores();
     }).fail(function(xhr, status, error) {
         console.error('Failed to fetch data:', error);
     });
+}
+
+function updateTaskScores() {
+    // This function would normally make additional calls to get detailed player data
+    // For now, we'll just keep the placeholder values
+    // In a real implementation, you'd need to:
+    // 1. Make separate API calls for each player to get their task scores
+    // 2. Parse and update the task cells accordingly
+    
+    // Since we're not implementing the detailed data retrieval in this simple example,
+    // we'll just leave the placeholder values as they are
 }
 
 // Initialize the refresh interval

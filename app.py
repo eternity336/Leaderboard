@@ -65,11 +65,11 @@ def update_players():
             if task_name in player_data:                                                                                 
                 score = int(player_data[task_name])                                                                      
                 task_scores[task_name] = score                                                                           
-                total_score += (score * task['weight']) / 100                                                           
+                total_score += score  # Changed: sum of scores, not weighted
             elif len(score_fields) > i and score_fields[i] in player_data:                                               
                 score = int(player_data[score_fields[i]])                                                                
                 task_scores[task_name] = score                                                                           
-                total_score += (score * task['weight']) / 100                                                           
+                total_score += score  # Changed: sum of scores, not weighted
             else:                                                                                                        
                 task_scores[task_name] = 0                                                                               
                                                                                                                          
@@ -79,13 +79,13 @@ def update_players():
         player_found = False                                                                                             
         for i, player in enumerate(players):                                                                             
             if player.startswith(f"{player_name},"):                                                                     
-                # Update existing player                                                                                 
+                # Update existing player - store task scores properly                                  
                 players[i] = f"{player_name}, {int(total_score)}, {task_scores}"                                                        
                 player_found = True                                                                                      
                 break                                                                                                    
                                                                                                                          
         if not player_found:                                                                                             
-            # Add new player                                                                                             
+            # Add new player - store task scores properly                                                     
             players.append(f"{player_name}, {int(total_score)}, {task_scores}")                                                         
 
     print(players)                                                                                                       
