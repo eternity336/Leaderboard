@@ -112,5 +112,6 @@ leaderboard:
 - `POST /update_players` - Update player information
 
 ## References
+If you'd like to use a specific font just drop the ttf file in the styles/fonts folder.
 
 Fonts from [1001fonts](https://www.1001fonts.com/)
