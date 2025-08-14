@@ -48,7 +48,6 @@ def update_players():
         player_name = player_data[display_name_field]                                                                    
         task_scores = {}                                                                                                 
         total_score = 0                                                                                                  
-                                                                                                                         
         for i, task in enumerate(tasks):                                                                                 
             task_name = task['name']                                                                                     
             if task_name in player_data:                                                                                 
@@ -65,7 +64,7 @@ def update_players():
             
             task_scores[task_name] = capped_score                                                                           
             total_score += capped_score                                                                                     
-                                                                                                                         
+
         player_found = False                                                                                             
         for i, player in enumerate(players):                                                                             
             if player.startswith(f"{player_name},"):                                                                     
@@ -73,7 +72,7 @@ def update_players():
                 players[i] = f"{player_name}, {int(total_score)}, {','.join(score_parts)}"                                
                 player_found = True                                                                                      
                 break                                                                                                    
-                                                                                                                         
+
         if not player_found:                                                                                             
             score_parts = [f"{task_name}:{task_scores[task_name]}" for task_name in task_scores]                      
             players.append(f"{player_name}, {int(total_score)}, {','.join(score_parts)}")                              
