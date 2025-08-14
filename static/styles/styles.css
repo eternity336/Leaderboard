@@ -182,7 +182,7 @@ table.showplayerstable thead th {
 .cyberpunk-theme {
   background-color: #000000;
   color: #ff00ff;
-  text-shadow: 0 0 5px #ffffff;
+  text-shadow: 0 0 5px #8553827b;
 }
 
 .cyberpunk-theme .showplayerstable {
@@ -197,7 +197,7 @@ table.showplayerstable thead th {
 
 .cyberpunk-theme .showplayerstable tbody td {
   color: #ff00ff;
-  text-shadow: 0 0 5px #ffffff;
+  text-shadow: 0 0 5px #8553827b;
 }
 
 .cyberpunk-theme .showplayerstable thead {
@@ -206,7 +206,7 @@ table.showplayerstable thead th {
 
 .cyberpunk-theme .showplayerstable thead th {
   color: #ff00ff;
-  text-shadow: 0 0 5px #ffffff;
+  text-shadow: 0 0 5px #8553827b;
 }
 
 .cyberpunk-theme .showplayerstable tr:nth-child(even) {
