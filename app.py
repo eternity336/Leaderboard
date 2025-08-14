@@ -80,13 +80,13 @@ def update_players():
         for i, player in enumerate(players):                                                                             
             if player.startswith(f"{player_name},"):                                                                     
                 # Update existing player                                                                                 
-                players[i] = f"{player_name}, {int(total_score)}"                                                        
+                players[i] = f"{player_name}, {int(total_score)}, {task_scores}"                                                        
                 player_found = True                                                                                      
                 break                                                                                                    
                                                                                                                          
         if not player_found:                                                                                             
             # Add new player                                                                                             
-            players.append(f"{player_name}, {int(total_score)}")                                                         
+            players.append(f"{player_name}, {int(total_score)}, {task_scores}")                                                         
 
     print(players)                                                                                                       
     message = {                                                                                                          
@@ -110,7 +110,11 @@ def sorted_list_of_players():
     # Parse player data to extract name and score for sorting
     def extract_score(player_str):
         try:
-            return int(player_str.split(', ')[1])
+            # Split by comma and get the second element (score)
+            parts = player_str.split(', ')
+            if len(parts) >= 2:
+                return int(parts[1])
+            return 0
         except (IndexError, ValueError):
             return 0
     
