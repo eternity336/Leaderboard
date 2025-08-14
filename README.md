@@ -9,23 +9,28 @@ A simple web application that displays player scores and allows updating player 
 - Supports Docker deployment
 - Cross-platform compatibility (Linux, Windows)
 
-## Running with Docker
+## Running with Docker Compose
 
 ### Prerequisites
-- Docker installed on your system
+- Docker and Docker Compose installed on your system
 
 ### Steps
-1. Build the Docker image:
+1. Run the application using Docker Compose:
    ```
-   docker build -t simple-leaderboard .
-   ```
-
-2. Run the container:
-   ```
-   docker run simple-leaderboard
+   docker-compose up
    ```
 
-3. Access the leaderboard at `http://localhost:5000`
+2. Access the leaderboard at `http://localhost:5000`
+
+3. To run in detached mode:
+   ```
+   docker-compose up -d
+   ```
+
+4. To stop the containers:
+   ```
+   docker-compose down
+   ```
 
 ## Running on Linux
 
