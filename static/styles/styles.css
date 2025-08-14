@@ -85,11 +85,10 @@ table.showplayerstable thead th {
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
   transition: all 0.3s ease;
   margin-bottom: 15px;
-  background-color: #4CAF50;
 }
 
 .font-toggle:hover {
-  background-color: #45a049;
+  background-color: #b0b8b1;
   transform: scale(1.1);
 }
 
