@@ -151,7 +151,7 @@ table.showplayerstable thead th {
 .matrix-theme {
   background-color: #000000;
   color: #00ff00;
-  text-shadow: 0 0 5px #00ff00;
+  text-shadow: 0 0 3px #00ff00;
 }
 
 .matrix-theme .showplayerstable {
@@ -166,7 +166,7 @@ table.showplayerstable thead th {
 
 .matrix-theme .showplayerstable tbody td {
   color: #00ff00;
-  text-shadow: 0 0 5px #00ff00;
+  text-shadow: 0 0 3px #00ff00;
 }
 
 .matrix-theme .showplayerstable thead {
@@ -175,14 +175,14 @@ table.showplayerstable thead th {
 
 .matrix-theme .showplayerstable thead th {
   color: #00ff00;
-  text-shadow: 0 0 5px #00ff00;
+  text-shadow: 0 0 3px #00ff00;
 }
 
 /* Cyberpunk Theme */
 .cyberpunk-theme {
   background-color: #000000;
   color: #ff00ff;
-  text-shadow: 0 0 10px #ff00ff;
+  text-shadow: 0 0 5px #ff00ff;
 }
 
 .cyberpunk-theme .showplayerstable {
@@ -197,7 +197,7 @@ table.showplayerstable thead th {
 
 .cyberpunk-theme .showplayerstable tbody td {
   color: #ff00ff;
-  text-shadow: 0 0 10px #ff00ff;
+  text-shadow: 0 0 5px #ff00ff;
 }
 
 .cyberpunk-theme .showplayerstable thead {
@@ -206,14 +206,14 @@ table.showplayerstable thead th {
 
 .cyberpunk-theme .showplayerstable thead th {
   color: #ff00ff;
-  text-shadow: 0 0 10px #ff00ff;
+  text-shadow: 0 0 5px #ff00ff;
 }
 
 /* Neon Theme */
 .neon-theme {
   background-color: #000000;
   color: #00ffff;
-  text-shadow: 0 0 10px #00ffff;
+  text-shadow: 0 0 5px #00ffff;
 }
 
 .neon-theme .showplayerstable {
@@ -228,7 +228,7 @@ table.showplayerstable thead th {
 
 .neon-theme .showplayerstable tbody td {
   color: #00ffff;
-  text-shadow: 0 0 10px #00ffff;
+  text-shadow: 0 0 5px #00ffff;
 }
 
 .neon-theme .showplayerstable thead {
@@ -237,14 +237,14 @@ table.showplayerstable thead th {
 
 .neon-theme .showplayerstable thead th {
   color: #00ffff;
-  text-shadow: 0 0 10px #00ffff;
+  text-shadow: 0 0 5px #00ffff;
 }
 
 /* Retro Theme */
 .retro-theme {
   background-color: #ffcc00;
   color: #000000;
-  text-shadow: 0 0 5px #000000;
+  text-shadow: 0 0 3px #000000;
 }
 
 .retro-theme .showplayerstable {
@@ -259,7 +259,7 @@ table.showplayerstable thead th {
 
 .retro-theme .showplayerstable tbody td {
   color: #000000;
-  text-shadow: 0 0 5px #000000;
+  text-shadow: 0 0 3px #000000;
 }
 
 .retro-theme .showplayerstable thead {
@@ -268,5 +268,5 @@ table.showplayerstable thead th {
 
 .retro-theme .showplayerstable thead th {
   color: #000000;
-  text-shadow: 0 0 5px #000000;
+  text-shadow: 0 0 3px #000000;
 }
