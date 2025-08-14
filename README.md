@@ -5,11 +5,6 @@
 
 Intended as a simple Leaderboard server. This is not inherently secure and I would not advise making this public facing. However it will work great internally. It was built with Python, HTML, JQuery and Javascript.
 
-## Features
-
-- Monitor Players/Teams Scores
-- Push Scores via an API
-
 ## Docker Setup
 
 A Docker Compose setup is included to run the application in a containerized environment. To use it:
@@ -24,6 +19,11 @@ The Docker setup uses:
 - Gunicorn as WSGI server (as specified in requirements.txt)
 - Port 5000 exposed for the Flask application
 - Volume mounting for development (code changes reflected immediately)
+
+## Features
+
+- Monitor Players/Teams Scores
+- Push Scores via an API
 
 ## Usage
 
