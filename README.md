@@ -32,7 +32,7 @@ and then add the systemd config /etc/systemd/system/leaderboard.service
     [Service]
     User=username
     ExecStart=/bin/gunicorn -b 0.0.0.0:8000 app:app  <-- Make sure this location is correct
-    WorkingDirectory=/path/to/app/ <-- Working dorectory of app
+    WorkingDirectory=/path/to/app/ <-- Working directory of app
     ExecReload=/bin/kill -s HUP $MAINPID
     KillMode=mixed
     TimeoutStopSec=5
@@ -89,15 +89,12 @@ To configure the leaderboard, you can use a YAML file named `config.yaml`. Here 
 ```yaml
 leaderboard:
   tasks:
-    - name: Task 1
+    - name: task_1
       weight: 20
-    - name: Task 2
+    - name: task_2
       weight: 30
-    - name: Task 3
+    - name: task_3
       weight: 50
-
-display_name_field: "name"
-score_fields: ["task_1", "task_2", "task_3"]
 ```
 
 ### Usage
@@ -132,4 +129,3 @@ Font from
 
 https://www.1001fonts.com/saiba-45-font.html
 ```
-
