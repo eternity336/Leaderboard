@@ -61,3 +61,20 @@ table.showplayerstable thead th {
   color: #FFFFFF;
   text-align: center;
 }
+
+.font-selector {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.font-selector label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.font-selector select {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}

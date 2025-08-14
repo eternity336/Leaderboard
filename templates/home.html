@@ -1,26 +1,100 @@
 <!doctype html>
-<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/styles.css')}}"/>
-<link rel="icon" type="image/icon" href="{{url_for('static',filename='images/leaderboardicon.png')}}"/>
-
-<title>Welcome to the Leaderboard</title>
-<H1 class="center banner">Welcome to the Leaderboard</H1>
-<div class="server_body">    
-    <div class="padding center">
-        <label class="center title">Players/Teams</label>
-        <table class='showplayerstable'>
-            <thead>
-            <tr>
-                <th>Player/Team Name</th>
-                {% for task in tasks %}
-                <th>{{ task['name'] }}</th>
-                {% endfor %}
-                <th>Total Score</th>
-            </tr>
-            </thead>
-            <tbody id='players'>
-            </tbody>
-        </table>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/styles.css')}}"/>
+    <link rel="icon" type="image/icon" href="{{url_for('static',filename='images/leaderboardicon.png')}}"/>
+</head>
+<body>
+    <div class="server_body">    
+        <div class="padding center">
+            <h1 class="center banner">Welcome to the Leaderboard</h1>
+            
+            <!-- Font Selector Dropdown -->
+            <div class="font-selector">
+                <label for="font-family">Choose Font: </label>
+                <select id="font-family" onchange="changeFont()">
+                    <option value="">Default Font</option>
+                    <!-- Options will be populated by JavaScript -->
+                </select>
+            </div>
+            
+            <table class='showplayerstable'>
+                <thead>
+                <tr>
+                    <th>Player/Team Name</th>
+                    {% for task in tasks %}
+                    <th>{{ task['name'] }}</th>
+                    {% endfor %}
+                    <th>Total Score</th>
+                </tr>
+                </thead>
+                <tbody id='players'>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
-<script src="{{url_for('static', filename='scripts/home.js')}}"></script>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="{{url_for('static', filename='scripts/home.js')}}"></script>
+    <script>
+        // Populate font selector with available fonts
+        function populateFontSelector() {
+            $.ajax({
+                url: "/getfonts",
+                type: 'GET'
+            }).done(function(data) {
+                const fontSelect = document.getElementById('font-family');
+                data.fonts.forEach(font => {
+                    const option = document.createElement('option');
+                    option.value = font;
+                    option.textContent = font.replace('.ttf', '').replace('.otf', '');
+                    fontSelect.appendChild(option);
+                });
+            }).fail(function() {
+                console.error("Failed to load fonts");
+            });
+        }
+
+        // Change font function
+        function changeFont() {
+            const selectedFont = document.getElementById('font-family').value;
+            
+            if (selectedFont) {
+                // Create or update font-face style
+                let fontStyle = document.getElementById('dynamic-font');
+                if (!fontStyle) {
+                    fontStyle = document.createElement('style');
+                    fontStyle.id = 'dynamic-font';
+                    document.head.appendChild(fontStyle);
+                }
+                
+                // Load the selected font
+                fontStyle.textContent = `
+                    @font-face {
+                        font-family: 'SelectedFont';
+                        src: url('/static/styles/fonts/${selectedFont}') format('truetype');
+                    }
+                    html, body {
+                        font-family: 'SelectedFont', sans-serif !important;
+                    }
+                `;
+            } else {
+                // Reset to default font
+                const fontStyle = document.getElementById('dynamic-font');
+                if (fontStyle) {
+                    fontStyle.remove();
+                }
+            }
+        }
+
+        // Initialize the page
+        $(document).ready(function() {
+            populateFontSelector();
+            refreshData();
+        });
+    </script>
+</body>
+</html>

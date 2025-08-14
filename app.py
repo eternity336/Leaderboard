@@ -1,4 +1,5 @@
 import yaml
+import os
 from flask import Flask, render_template, jsonify, request
 
 app = Flask(__name__)
@@ -47,6 +48,25 @@ def get_data():
     }
     resp = jsonify(message)
     return resp
+
+
+@app.route("/getfonts")
+def get_fonts():
+    """Get list of available fonts from the fonts directory.
+
+    Returns:
+        JSON response containing list of font files
+    """
+    fonts_dir = 'static/styles/fonts'
+    try:
+        if os.path.exists(fonts_dir):
+            fonts = [f for f in os.listdir(fonts_dir) if f.endswith(('.ttf', '.otf'))]
+            return jsonify({'fonts': fonts})
+        else:
+            return jsonify({'fonts': []})
+    except Exception as e:
+        print(f"Error reading fonts directory: {e}")
+        return jsonify({'fonts': []})
 
 
 @app.route("/update_players", methods=["POST"])
