@@ -128,5 +128,5 @@ To run the application locally:
 
 ## References
 
-Font from [https://www.1001fonts.com/saiba-45-font.html](https://www.1001fonts.com/saiba-45-font.html)
+Font from [Saiba 45 font](https://www.1001fonts.com/saiba-45-font.html)
 ```
