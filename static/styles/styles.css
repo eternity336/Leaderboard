@@ -64,7 +64,7 @@ table.showplayerstable thead th {
 
 .font-selector {
   margin-bottom: 20px;
-  text-align: center;
+  /* Removed text-align: center; */
 }
 
 .font-selector label {
