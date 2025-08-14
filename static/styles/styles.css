@@ -1,6 +1,6 @@
 @font-face {
   font-family: cyberpunk;
-  src: url(fonts/saiba-45.regular.ttf);
+  src: url(fonts/BoldPixels1.4.ttf);
 }
 html {
   font-family: cyberpunk;
@@ -31,7 +31,6 @@ html {
   padding: 1%;
 }
 table.showplayerstable {
-  /* font-family: "Comic Sans MS", cursive, sans-serif; */
   border: 1px solid #073d04;
   background-color: #336f30;
   width: 100%;
