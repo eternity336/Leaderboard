@@ -22,7 +22,7 @@ A simple web application that displays player scores and allows updating player 
 
 2. Run the container:
    ```
-   docker run -p 5000:5000 simple-leaderboard
+   docker run simple-leaderboard
    ```
 
 3. Access the leaderboard at `http://localhost:5000`
