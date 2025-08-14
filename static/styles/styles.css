@@ -106,6 +106,7 @@ table.showplayerstable thead th {
   transition: all 0.3s ease;
   width: 200px;
   margin-bottom: 10px;
+  z-index: 1001;
 }
 
 .theme-dropdown {
@@ -121,6 +122,7 @@ table.showplayerstable thead th {
   transform: translateY(-10px);
   transition: all 0.3s ease;
   width: 200px;
+  z-index: 1001;
 }
 
 .font-sidebar:hover .font-dropdown,
@@ -180,6 +182,10 @@ table.showplayerstable thead th {
   text-shadow: 0 0 3px #00ff00;
 }
 
+.matrix-theme .showplayerstable tr:nth-child(even) {
+  background: #003300;
+}
+
 /* Cyberpunk Theme */
 .cyberpunk-theme {
   background-color: #000000;
@@ -209,6 +215,10 @@ table.showplayerstable thead th {
 .cyberpunk-theme .showplayerstable thead th {
   color: #ff00ff;
   text-shadow: 0 0 5px #ff00ff;
+}
+
+.cyberpunk-theme .showplayerstable tr:nth-child(even) {
+  background: #330033;
 }
 
 /* Neon Theme */
@@ -242,6 +252,10 @@ table.showplayerstable thead th {
   text-shadow: 0 0 5px #00ffff;
 }
 
+.neon-theme .showplayerstable tr:nth-child(even) {
+  background: #003333;
+}
+
 /* Retro Theme */
 .retro-theme {
   background-color: #ffcc00;
@@ -271,4 +285,8 @@ table.showplayerstable thead th {
 .retro-theme .showplayerstable thead th {
   color: #000000;
   text-shadow: 0 0 3px #000000;
+}
+
+.retro-theme .showplayerstable tr:nth-child(even) {
+  background: #ff6600;
 }
