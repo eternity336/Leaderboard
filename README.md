@@ -10,6 +10,21 @@ Intended as a simple Leaderboard server. This is not inherently secure and I wou
 - Monitor Players/Teams Scores
 - Push Scores via an API
 
+## Docker Setup
+
+A Docker Compose setup is included to run the application in a containerized environment. To use it:
+
+1. Make sure you have Docker and Docker Compose installed
+2. Navigate to the project directory containing `docker-compose.yml` and `Dockerfile`
+3. Run `docker-compose up` to build and start the container
+4. The application will be accessible at http://localhost:8080
+
+The Docker setup uses:
+- Python 3.9 slim image
+- Gunicorn as WSGI server (as specified in requirements.txt)
+- Port 5000 exposed for the Flask application
+- Volume mounting for development (code changes reflected immediately)
+
 ## Usage
 
 To push player data to the server use a POST request:
@@ -73,21 +88,6 @@ http://<serverIP>:<port>
 ```
 
 If you want a different port than 8000, just add the port to the above config after `0.0.0.0` with `:<port>`.
-
-## Docker Setup
-
-A Docker Compose setup is included to run the application in a containerized environment. To use it:
-
-1. Make sure you have Docker and Docker Compose installed
-2. Navigate to the project directory containing `docker-compose.yml` and `Dockerfile`
-3. Run `docker-compose up` to build and start the container
-4. The application will be accessible at http://localhost:8080
-
-The Docker setup uses:
-- Python 3.9 slim image
-- Gunicorn as WSGI server (as specified in requirements.txt)
-- Port 5000 exposed for the Flask application
-- Volume mounting for development (code changes reflected immediately)
 
 ## Windows Setup
 
