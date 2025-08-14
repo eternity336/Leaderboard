@@ -73,7 +73,6 @@ table.showplayerstable thead th {
 .font-toggle {
   width: 40px;
   height: 40px;
-  background-color: #4CAF50;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -86,7 +85,7 @@ table.showplayerstable thead th {
 }
 
 .font-toggle:hover {
-  background-color: #45a049;
+  background-color: #868786;
   transform: scale(1.1);
 }
 
