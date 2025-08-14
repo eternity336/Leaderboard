@@ -1,5 +1,5 @@
 # Simple Leaderboard Server
-
+![image](screenshot/ScreenshotLeaderboard.png)
 A simple web application that displays player scores and allows updating player data via HTTP requests.
 
 ## Features
@@ -74,3 +74,43 @@ A simple web application that displays player scores and allows updating player 
 
 To update player data, send a POST request to `/update_players` endpoint with JSON data in the following format:
 
+```
+[{                                                                                                        "name": "Player1",
+    "task_1": 50,
+    "task_2": 75,
+    "task_3":25
+}]
+```
+
+Each player object should contain:                                                                                       
+                                                                                                                         
+- `name`: Player's name (required)                                                                                       
+                                                                                                                         
+- Task names: Score values for each task defined in config.yaml                                                          
+
+The server will process the data and update the leaderboard accordingly.                                                 
+## Configuration                                                                                        
+The application uses `config.yaml` to define tasks. This file specifies the tasks that will appear on the leaderboard along with their maximum weights. The configuration file defines a list of tasks, each with a name and weight value.
+
+Example Configuration:
+
+```yaml
+leaderboard:
+  tasks:
+    - name: task_1
+      weight: 20
+    - name: task_2
+      weight: 30
+    - name: task_3
+      weight: 50
+```
+
+## API Endpoints
+
+- `GET /` - Main leaderboard page
+- `GET /getdata` - Returns current player data
+- `POST /update_players` - Update player information
+
+## References
+
+Fonts from [1001fonts](https://www.1001fonts.com/)
