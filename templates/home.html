@@ -56,17 +56,26 @@
         function populateFontSelector() {
             $.ajax({
                 url: "/getfonts",
-                type: 'GET'
-            }).done(function(data) {
-                const fontSelect = document.getElementById('font-family');
-                data.fonts.forEach(font => {
-                    const option = document.createElement('option');
-                    option.value = font;
-                    option.textContent = font.replace('.ttf', '').replace('.otf', '');
-                    fontSelect.appendChild(option);
-                });
-            }).fail(function() {
-                console.error("Failed to load fonts");
+                type: 'GET',
+                success: function(data) {
+                    const fontSelect = document.getElementById('font-family');
+                    // Clear existing options except the default
+                    fontSelect.innerHTML = '<option value="">Default Font</option>';
+                    
+                    if (data && data.fonts && Array.isArray(data.fonts)) {
+                        data.fonts.forEach(font => {
+                            const option = document.createElement('option');
+                            option.value = font;
+                            option.textContent = font.replace('.ttf', '').replace('.otf', '');
+                            fontSelect.appendChild(option);
+                        });
+                    } else {
+                        console.error("Invalid fonts data received:", data);
+                    }
+                },
+                error: function() {
+                    console.error("Failed to load fonts");
+                }
             });
         }
 
