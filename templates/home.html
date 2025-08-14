@@ -22,6 +22,15 @@
                         <!-- Options will be populated by JavaScript -->
                     </select>
                 </div>
+                <div class="theme-dropdown">
+                    <label for="theme-selector">Choose Theme: </label>
+                    <select id="theme-selector" onchange="changeTheme()">
+                        <option value="matrix">Matrix</option>
+                        <option value="cyberpunk">Cyberpunk</option>
+                        <option value="neon">Neon</option>
+                        <option value="retro">Retro</option>
+                    </select>
+                </div>
             </div>
             
             <table class='showplayerstable'>
@@ -91,6 +100,17 @@
                     fontStyle.remove();
                 }
             }
+        }
+
+        // Change theme function
+        function changeTheme() {
+            const selectedTheme = document.getElementById('theme-selector').value;
+            
+            // Remove all theme classes
+            document.body.classList.remove('matrix-theme', 'cyberpunk-theme', 'neon-theme', 'retro-theme');
+            
+            // Add the selected theme class
+            document.body.classList.add(selectedTheme + '-theme');
         }
 
         // Initialize the page

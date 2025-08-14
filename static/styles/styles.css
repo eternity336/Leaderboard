@@ -82,6 +82,7 @@ table.showplayerstable thead th {
   font-size: 20px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
   transition: all 0.3s ease;
+  margin-bottom: 10px;
 }
 
 .font-toggle:hover {
@@ -102,15 +103,33 @@ table.showplayerstable thead th {
   transform: translateY(-10px);
   transition: all 0.3s ease;
   width: 200px;
+  margin-bottom: 10px;
 }
 
-.font-sidebar:hover .font-dropdown {
+.theme-dropdown {
+  position: absolute;
+  top: 50px;
+  right: 45px;
+  background-color: #333;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  width: 200px;
+}
+
+.font-sidebar:hover .font-dropdown,
+.font-sidebar:hover .theme-dropdown {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
 }
 
-.font-dropdown label {
+.font-dropdown label,
+.theme-dropdown label {
   color: white;
   font-weight: bold;
   margin-right: 10px;
@@ -118,11 +137,136 @@ table.showplayerstable thead th {
   margin-bottom: 5px;
 }
 
-.font-dropdown select {
+.font-dropdown select,
+.theme-dropdown select {
   width: 100%;
   padding: 8px;
   border-radius: 4px;
   border: 1px solid #ccc;
   font-size: 14px;
   background-color: white;
+}
+
+/* Matrix Theme (Default) */
+.matrix-theme {
+  background-color: #000000;
+  color: #00ff00;
+  text-shadow: 0 0 5px #00ff00;
+}
+
+.matrix-theme .showplayerstable {
+  border-color: #00ff00;
+  background-color: #002200;
+}
+
+.matrix-theme .showplayerstable td,
+.matrix-theme .showplayerstable th {
+  border-color: #00ff00;
+}
+
+.matrix-theme .showplayerstable tbody td {
+  color: #00ff00;
+  text-shadow: 0 0 5px #00ff00;
+}
+
+.matrix-theme .showplayerstable thead {
+  background-color: #003300;
+}
+
+.matrix-theme .showplayerstable thead th {
+  color: #00ff00;
+  text-shadow: 0 0 5px #00ff00;
+}
+
+/* Cyberpunk Theme */
+.cyberpunk-theme {
+  background-color: #000000;
+  color: #ff00ff;
+  text-shadow: 0 0 10px #ff00ff;
+}
+
+.cyberpunk-theme .showplayerstable {
+  border-color: #ff00ff;
+  background-color: #220022;
+}
+
+.cyberpunk-theme .showplayerstable td,
+.cyberpunk-theme .showplayerstable th {
+  border-color: #ff00ff;
+}
+
+.cyberpunk-theme .showplayerstable tbody td {
+  color: #ff00ff;
+  text-shadow: 0 0 10px #ff00ff;
+}
+
+.cyberpunk-theme .showplayerstable thead {
+  background-color: #330033;
+}
+
+.cyberpunk-theme .showplayerstable thead th {
+  color: #ff00ff;
+  text-shadow: 0 0 10px #ff00ff;
+}
+
+/* Neon Theme */
+.neon-theme {
+  background-color: #000000;
+  color: #00ffff;
+  text-shadow: 0 0 10px #00ffff;
+}
+
+.neon-theme .showplayerstable {
+  border-color: #00ffff;
+  background-color: #002222;
+}
+
+.neon-theme .showplayerstable td,
+.neon-theme .showplayerstable th {
+  border-color: #00ffff;
+}
+
+.neon-theme .showplayerstable tbody td {
+  color: #00ffff;
+  text-shadow: 0 0 10px #00ffff;
+}
+
+.neon-theme .showplayerstable thead {
+  background-color: #003333;
+}
+
+.neon-theme .showplayerstable thead th {
+  color: #00ffff;
+  text-shadow: 0 0 10px #00ffff;
+}
+
+/* Retro Theme */
+.retro-theme {
+  background-color: #ffcc00;
+  color: #000000;
+  text-shadow: 0 0 5px #000000;
+}
+
+.retro-theme .showplayerstable {
+  border-color: #000000;
+  background-color: #ff9900;
+}
+
+.retro-theme .showplayerstable td,
+.retro-theme .showplayerstable th {
+  border-color: #000000;
+}
+
+.retro-theme .showplayerstable tbody td {
+  color: #000000;
+  text-shadow: 0 0 5px #000000;
+}
+
+.retro-theme .showplayerstable thead {
+  background-color: #ff6600;
+}
+
+.retro-theme .showplayerstable thead th {
+  color: #000000;
+  text-shadow: 0 0 5px #000000;
 }
