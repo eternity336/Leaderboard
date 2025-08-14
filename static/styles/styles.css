@@ -6,7 +6,7 @@ html {
   font-family: cyberpunk;
   font-size: 40px;
   background-color: #000000;
-  text-shadow: 0px 0px 10px #727272;
+  text-shadow: 0px 0px 10px #ffffff;
   color: #40ff00;
 }
 .center{
@@ -16,7 +16,7 @@ html {
   display: block;
   font-size: 40px;
   font-style: bold;
-  text-shadow: 0px 0px 10px #000000;
+  text-shadow: 0px 0px 10px #ffffff;
   color: #40ff00;
   padding: 5px;
   background-color: #073d04;
@@ -44,7 +44,7 @@ table.showplayerstable td, table.showplayerstable th {
 table.showplayerstable tbody td {
   font-size: 30px;
   font-weight: bold;
-  text-shadow: 0px 0px 10px #000000;
+  text-shadow: 0px 0px 10px #ffffff;
   color: #40ff00;
 }
 table.showplayerstable tr:nth-child(even) {
@@ -57,105 +57,16 @@ table.showplayerstable thead {
 table.showplayerstable thead th {
   font-size: 30px;
   font-weight: bold;
-  text-shadow: 0px 0px 10px #000000;
+  text-shadow: 0px 0px 10px #ffffff;
   color: #FFFFFF;
   text-align: center;
-}
-
-/* Sidebar Font Selector */
-.font-sidebar {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.font-toggle {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 20px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  transition: all 0.3s ease;
-  margin-bottom: 15px;
-}
-
-.font-toggle:hover {
-  background-color: #b0b8b1;
-  transform: scale(1.1);
-}
-
-.font-dropdown {
-  position: absolute;
-  top: 0;
-  right: 45px;
-  background-color: #333;
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-10px);
-  transition: all 0.3s ease;
-  width: 200px;
-  margin-bottom: 10px;
-  z-index: 1001;
-}
-
-.theme-dropdown {
-  position: absolute;
-  top: 60px;
-  right: 45px;
-  background-color: #333;
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-10px);
-  transition: all 0.3s ease;
-  width: 200px;
-  z-index: 1001;
-}
-
-.font-sidebar:hover .font-dropdown,
-.font-sidebar:hover .theme-dropdown {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.font-dropdown label,
-.theme-dropdown label {
-  color: white;
-  font-weight: bold;
-  margin-right: 10px;
-  display: block;
-  margin-bottom: 5px;
-}
-
-.font-dropdown select,
-.theme-dropdown select {
-  width: 100%;
-  padding: 8px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-  background-color: white;
 }
 
 /* Matrix Theme (Default) */
 .matrix-theme {
   background-color: #000000;
   color: #00ff00;
-  text-shadow: 0 0 3px #00ff00;
+  text-shadow: 0 0 3px #ffffff;
 }
 
 .matrix-theme .showplayerstable {
@@ -170,7 +81,7 @@ table.showplayerstable thead th {
 
 .matrix-theme .showplayerstable tbody td {
   color: #00ff00;
-  text-shadow: 0 0 3px #00ff00;
+  text-shadow: 0 0 3px #ffffff;
 }
 
 .matrix-theme .showplayerstable thead {
@@ -179,7 +90,7 @@ table.showplayerstable thead th {
 
 .matrix-theme .showplayerstable thead th {
   color: #00ff00;
-  text-shadow: 0 0 3px #00ff00;
+  text-shadow: 0 0 3px #ffffff;
 }
 
 .matrix-theme .showplayerstable tr:nth-child(even) {
@@ -190,7 +101,7 @@ table.showplayerstable thead th {
 .cyberpunk-theme {
   background-color: #000000;
   color: #ff00ff;
-  text-shadow: 0 0 5px #ff00ff;
+  text-shadow: 0 0 5px #ffffff;
 }
 
 .cyberpunk-theme .showplayerstable {
@@ -205,7 +116,7 @@ table.showplayerstable thead th {
 
 .cyberpunk-theme .showplayerstable tbody td {
   color: #ff00ff;
-  text-shadow: 0 0 5px #ff00ff;
+  text-shadow: 0 0 5px #ffffff;
 }
 
 .cyberpunk-theme .showplayerstable thead {
@@ -214,7 +125,7 @@ table.showplayerstable thead th {
 
 .cyberpunk-theme .showplayerstable thead th {
   color: #ff00ff;
-  text-shadow: 0 0 5px #ff00ff;
+  text-shadow: 0 0 5px #ffffff;
 }
 
 .cyberpunk-theme .showplayerstable tr:nth-child(even) {
@@ -225,7 +136,7 @@ table.showplayerstable thead th {
 .neon-theme {
   background-color: #000000;
   color: #00ffff;
-  text-shadow: 0 0 5px #00ffff;
+  text-shadow: 0 0 5px #ffffff;
 }
 
 .neon-theme .showplayerstable {
@@ -240,7 +151,7 @@ table.showplayerstable thead th {
 
 .neon-theme .showplayerstable tbody td {
   color: #00ffff;
-  text-shadow: 0 0 5px #00ffff;
+  text-shadow: 0 0 5px #ffffff;
 }
 
 .neon-theme .showplayerstable thead {
@@ -249,7 +160,7 @@ table.showplayerstable thead th {
 
 .neon-theme .showplayerstable thead th {
   color: #00ffff;
-  text-shadow: 0 0 5px #00ffff;
+  text-shadow: 0 0 5px #ffffff;
 }
 
 .neon-theme .showplayerstable tr:nth-child(even) {
@@ -260,7 +171,7 @@ table.showplayerstable thead th {
 .retro-theme {
   background-color: #ffcc00;
   color: #000000;
-  text-shadow: 0 0 3px #000000;
+  text-shadow: 0 0 3px #ffffff;
 }
 
 .retro-theme .showplayerstable {
@@ -275,7 +186,7 @@ table.showplayerstable thead th {
 
 .retro-theme .showplayerstable tbody td {
   color: #000000;
-  text-shadow: 0 0 3px #000000;
+  text-shadow: 0 0 3px #ffffff;
 }
 
 .retro-theme .showplayerstable thead {
@@ -284,7 +195,7 @@ table.showplayerstable thead th {
 
 .retro-theme .showplayerstable thead th {
   color: #000000;
-  text-shadow: 0 0 3px #000000;
+  text-shadow: 0 0 3px #ffffff;
 }
 
 .retro-theme .showplayerstable tr:nth-child(even) {
