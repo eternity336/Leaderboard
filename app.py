@@ -65,20 +65,24 @@ def update_players():
             # Look for score using either direct field match or score_fields mapping                                
             if task_name in player_data:                                                                                 
                 score = int(player_data[task_name])                                                                      
-                # Cap the score at maximum allowed value
-                if task_name in task_max_scores:
-                    score = min(score, task_max_scores[task_name])
-                task_scores[task_name] = score                                                                           
-                total_score += score  # Changed: sum of scores, not weighted
             elif len(score_fields) > i and score_fields[i] in player_data:                                               
                 score = int(player_data[score_fields[i]])                                                                
-                # Cap the score at maximum allowed value
-                if task_name in task_max_scores:
-                    score = min(score, task_max_scores[task_name])
-                task_scores[task_name] = score                                                                           
-                total_score += score  # Changed: sum of scores, not weighted
             else:                                                                                                        
-                task_scores[task_name] = 0                                                                               
+                score = 0                                                                                                
+            
+            # Apply weight if specified
+            weight = task.get('weight', 1)
+            weighted_score = score * weight
+            
+            # Cap the weighted score at maximum allowed value
+            max_score = task.get('max_score', float('inf'))
+            capped_weighted_score = min(weighted_score, max_score)
+            
+            # Ensure no negative scores
+            capped_weighted_score = max(capped_weighted_score, 0)
+            
+            task_scores[task_name] = capped_weighted_score                                                                           
+            total_score += capped_weighted_score  # Changed: sum of scores, not weighted
                                                                                                                          
         print("Tasks Scores:", task_scores)                                                                              
                                                                                                                          
