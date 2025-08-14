@@ -88,8 +88,17 @@ def update_players():
         total_score = 0
         for i, task in enumerate(tasks):
             task_name = task['name']
-            if task_name in player_data:
-                score = int(player_data[task_name])
+            score = 0
+            
+            # Check if the task name exists in player_data (case-insensitive)
+            found_task_key = None
+            for key in player_data:
+                if key.lower() == task_name.lower():
+                    found_task_key = key
+                    break
+            
+            if found_task_key:
+                score = int(player_data[found_task_key])
             elif len(score_fields) > i and score_fields[i] in player_data:
                 score = int(player_data[score_fields[i]])
             else:
