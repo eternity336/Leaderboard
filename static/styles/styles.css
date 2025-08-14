@@ -62,9 +62,17 @@ table.showplayerstable thead th {
   text-align: center;
 }
 
+/* Hide font selector completely */
+.font-selector.hidden {
+  display: none !important;
+}
+
 .font-selector {
   margin-bottom: 20px;
   /* Removed text-align: center; */
+  visibility: hidden;
+  position: absolute;
+  left: -9999px;
 }
 
 .font-selector label {
