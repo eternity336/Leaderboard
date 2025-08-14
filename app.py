@@ -21,13 +21,11 @@ except FileNotFoundError:
 print(tasks, display_name_field, score_fields)                                                                                        
 @app.route("/")                                                                                                          
 def home():                                                                                                              
-    ## Homepage for Leaderboard                                                                                          
     return render_template('home.html', players=sorted_list_of_players(), tasks=tasks,                                   
 display_name_field=display_name_field)                                                                                   
 
 @app.route("/getdata")                                                                                                   
 def get_data():                                                                                                          
-    ## Data that is refreshed every sec to homepage                                                                      
     global players                                                                                                       
     data = {                                                                                                             
         'players': sorted_list_of_players(),                                                                             
@@ -78,7 +76,7 @@ def update_players():
             capped_score = max(capped_score, 0)
             
             task_scores[task_name] = capped_score                                                                           
-            total_score += capped_score  # Changed: sum of scores, not weighted
+            total_score += capped_score                                                                                     
                                                                                                                          
         print("Tasks Scores:", task_scores)                                                                              
                                                                                                                          
