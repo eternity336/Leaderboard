@@ -20,7 +20,7 @@ A simple web application that displays player scores and allows updating player 
    docker-compose up
    ```
 
-2. Access the leaderboard at `http://localhost:5000`
+2. Access the leaderboard at `http://localhost:8000`
 
 3. To run in detached mode:
    ```
