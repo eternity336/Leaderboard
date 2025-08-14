@@ -9,9 +9,8 @@ try:
     with open('config.yaml', 'r') as config_file:                                                                        
         config = yaml.safe_load(config_file)                                                                             
         tasks = config.get('leaderboard', {}).get('tasks', [])                                                           
-        display_name_field = config.get('leaderboard', {}).get('display_name_field', "name")                             
-        score_fields = config.get('leaderboard', {}).get('score_fields', [])                                             
-        task_max_scores = {task['name']: task.get('max_score', float('inf')) for task in tasks}
+        display_name_field = "name"                                                                                          
+        score_fields = [task['name'] for task in tasks]                                                                     
 except FileNotFoundError:                                                                                                
     print("config.yaml not found. Using default configuration.")                                                         
     tasks = []                                                                                                           
