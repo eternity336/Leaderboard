@@ -11,6 +11,7 @@ try:
         tasks = config.get('leaderboard', {}).get('tasks', [])                                                           
         display_name_field = config.get('leaderboard', {}).get('display_name_field', "name")                             
         score_fields = config.get('leaderboard', {}).get('score_fields', [])                                             
+        task_max_scores = {task['name']: task.get('max_score', float('inf')) for task in tasks}
 except FileNotFoundError:                                                                                                
     print("config.yaml not found. Using default configuration.")                                                         
     tasks = []                                                                                                           
@@ -64,10 +65,16 @@ def update_players():
             # Look for score using either direct field match or score_fields mapping                                
             if task_name in player_data:                                                                                 
                 score = int(player_data[task_name])                                                                      
+                # Cap the score at maximum allowed value
+                if task_name in task_max_scores:
+                    score = min(score, task_max_scores[task_name])
                 task_scores[task_name] = score                                                                           
                 total_score += score  # Changed: sum of scores, not weighted
             elif len(score_fields) > i and score_fields[i] in player_data:                                               
                 score = int(player_data[score_fields[i]])                                                                
+                # Cap the score at maximum allowed value
+                if task_name in task_max_scores:
+                    score = min(score, task_max_scores[task_name])
                 task_scores[task_name] = score                                                                           
                 total_score += score  # Changed: sum of scores, not weighted
             else:                                                                                                        
