@@ -62,8 +62,8 @@ table.showplayerstable thead th {
   text-align: center;
 }
 
-/* Sidebar Font Selector */
-.font-sidebar {
+/* Sidebar Container */
+.sidebar-container {
   position: fixed;
   top: 20px;
   right: 20px;
@@ -94,11 +94,14 @@ table.showplayerstable thead th {
   transform: scale(1.1);
 }
 
+.sidebar-dropdowns {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
 .font-dropdown,
 .theme-dropdown {
-  position: absolute;
-  top: 0;
-  right: 45px;
   background-color: #333;
   padding: 10px;
   border-radius: 5px;
@@ -114,11 +117,11 @@ table.showplayerstable thead th {
 }
 
 .theme-dropdown {
-  top: 60px;
+  margin-bottom: 0;
 }
 
-.font-sidebar:hover .font-dropdown,
-.font-sidebar:hover .theme-dropdown {
+.sidebar-container:hover .font-dropdown,
+.sidebar-container:hover .theme-dropdown {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);

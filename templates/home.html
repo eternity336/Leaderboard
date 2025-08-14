@@ -12,24 +12,26 @@
         <div class="padding center">
             <h1 class="center banner">Welcome to the Leaderboard</h1>
             
-            <!-- Sidebar Font Selector -->
-            <div class="font-sidebar">
+            <!-- Sidebar Container -->
+            <div class="sidebar-container">
                 <div class="font-toggle">⚙️</div>
-                <div class="font-dropdown">
-                    <label for="font-family">Font: </label>
-                    <select id="font-family" onchange="changeFont()">
-                        <option value="">Default Font</option>
-                        <!-- Options will be populated by JavaScript -->
-                    </select>
-                </div>
-                <div class="theme-dropdown">
-                    <label for="theme-selector">Theme: </label>
-                    <select id="theme-selector" onchange="changeTheme()">
-                        <option value="matrix">Matrix</option>
-                        <option value="cyberpunk">Cyberpunk</option>
-                        <option value="neon">Neon</option>
-                        <option value="retro">Retro</option>
-                    </select>
+                <div class="sidebar-dropdowns">
+                    <div class="font-dropdown">
+                        <label for="font-family">Font: </label>
+                        <select id="font-family" onchange="changeFont()">
+                            <option value="">Default Font</option>
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    <div class="theme-dropdown">
+                        <label for="theme-selector">Theme: </label>
+                        <select id="theme-selector" onchange="changeTheme()">
+                            <option value="matrix">Matrix</option>
+                            <option value="cyberpunk">Cyberpunk</option>
+                            <option value="neon">Neon</option>
+                            <option value="retro">Retro</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             
