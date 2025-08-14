@@ -79,14 +79,16 @@ def update_players():
         player_found = False                                                                                             
         for i, player in enumerate(players):                                                                             
             if player.startswith(f"{player_name},"):                                                                     
-                # Update existing player - store task scores properly                                  
-                players[i] = f"{player_name}, {int(total_score)}, {task_scores}"                                                        
+                # Update existing player - store individual scores as comma-separated values                                  
+                score_parts = [f"{task_name}:{task_scores[task_name]}" for task_name in task_scores]                      
+                players[i] = f"{player_name}, {int(total_score)}, {','.join(score_parts)}"                                
                 player_found = True                                                                                      
                 break                                                                                                    
                                                                                                                          
         if not player_found:                                                                                             
-            # Add new player - store task scores properly                                                     
-            players.append(f"{player_name}, {int(total_score)}, {task_scores}")                                                         
+            # Add new player - store individual scores as comma-separated values                                      
+            score_parts = [f"{task_name}:{task_scores[task_name]}" for task_name in task_scores]                      
+            players.append(f"{player_name}, {int(total_score)}, {','.join(score_parts)}")                              
 
     print(players)                                                                                                       
     message = {                                                                                                          

@@ -5,7 +5,7 @@ function delTable(name){
     $(`#${name}`).empty();
 }
 
-function create_player_row(player_name, player_score, tasks) {
+function create_player_row(player_name, player_score, tasks, task_scores_str) {
     if (!tasks || !Array.isArray(tasks)) {
         console.error("Tasks array is not defined or invalid");
         return;
@@ -19,11 +19,28 @@ function create_player_row(player_name, player_score, tasks) {
     var nameCell = row.insertCell(0);
     nameCell.innerHTML = player_name;
 
+    // Parse task scores from string
+    let task_scores = {};
+    if (task_scores_str) {
+        let score_parts = task_scores_str.split(',');
+        for (let part of score_parts) {
+            let [task_name, score] = part.split(':');
+            if (task_name && score) {
+                task_scores[task_name] = parseInt(score);
+            }
+        }
+    }
+
     // Add task cells (skip first column for name)
     for (let i = 0; i < tasks.length; i++) {
         let taskCell = row.insertCell(i + 1);  // Task cells start from index 1
         taskCell.id = `task-${player_name}-${i}`;
-        taskCell.innerHTML = "0"; // Initialize with 0, will be updated by backend data
+        let task_name = tasks[i].name;
+        if (task_scores[task_name] !== undefined) {
+            taskCell.innerHTML = task_scores[task_name];
+        } else {
+            taskCell.innerHTML = "0";
+        }
     }
 
     // Add total score cell at the end
@@ -35,7 +52,7 @@ function addPlayers(players, tasks) {
     console.log('online', players);
     for (let i = 0; i < players.length; i++) {
         let playerRow = players[i].split(', ');
-        create_player_row(playerRow[0], playerRow[1], tasks);  // Use player name and score
+        create_player_row(playerRow[0], playerRow[1], tasks, playerRow.slice(2).join(', '));  // Pass task scores
     }
 }
 
