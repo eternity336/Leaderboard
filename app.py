@@ -70,19 +70,15 @@ def update_players():
             else:                                                                                                        
                 score = 0                                                                                                
             
-            # Apply weight if specified
-            weight = task.get('weight', 1)
-            weighted_score = score * weight
-            
-            # Cap the weighted score at maximum allowed value
-            max_score = task.get('max_score', float('inf'))
-            capped_weighted_score = min(weighted_score, max_score)
+            # Cap the score at maximum allowed value (using weight as max_score)
+            max_score = task.get('weight', float('inf'))
+            capped_score = min(score, max_score)
             
             # Ensure no negative scores
-            capped_weighted_score = max(capped_weighted_score, 0)
+            capped_score = max(capped_score, 0)
             
-            task_scores[task_name] = capped_weighted_score                                                                           
-            total_score += capped_weighted_score  # Changed: sum of scores, not weighted
+            task_scores[task_name] = capped_score                                                                           
+            total_score += capped_score  # Changed: sum of scores, not weighted
                                                                                                                          
         print("Tasks Scores:", task_scores)                                                                              
                                                                                                                          
