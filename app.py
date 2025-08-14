@@ -18,23 +18,21 @@ except FileNotFoundError:
 
 @app.route("/")                                                                                                          
 def home():                                                                                                              
-    """
-    Render the home page with leaderboard data.
-    
+    """Render the home page with leaderboard data.
+
     Returns:
         Rendered HTML template with players, tasks, and display name field
-    """
+    """                                                                                                                    
     return render_template('home.html', players=sorted_list_of_players(), tasks=tasks,                                   
 display_name_field=display_name_field)                                                                                   
 
 @app.route("/getdata")                                                                                                   
 def get_data():                                                                                                          
-    """
-    Get current leaderboard data.
-    
+    """Get current leaderboard data.
+
     Returns:
         JSON response containing players and tasks data
-    """
+    """                                                                                                                    
     global players                                                                                                       
     data = {                                                                                                             
         'players': sorted_list_of_players(),                                                                             
@@ -50,12 +48,11 @@ def get_data():
 
 @app.route("/update_players", methods=["POST"])                                                                                  
 def update_players():                                                                                                    
-    """
-    Update player scores from POST request.
-    
+    """Update player scores from POST request.
+
     Returns:
         JSON response with updated leaderboard data
-    """
+    """                                                                                                                    
     global players                                                                                                       
     new_players = request.get_json()                                                                                     
     if not isinstance(new_players, list):                                                                                
@@ -104,27 +101,25 @@ def update_players():
     return resp                                                                                                          
 
 def extract_second_value(item):                                                                                          
-    """
-    Extract the second value from a comma-separated string.
-    
+    """Extract the second value from a comma-separated string.
+
     Args:
         item (str): Comma-separated string
         
     Returns:
         int: The second value parsed as integer, or 0 if parsing fails
-    """
+    """                                                                                                                    
     try:                                                                                                                 
         return int(item.split(',')[1])                                                                                   
     except (IndexError, ValueError):                                                                                     
         return 0                                                                                                         
 
 def sorted_list_of_players():                                                                                            
-    """
-    Sort players by their scores in descending order.
-    
+    """Sort players by their scores in descending order.
+
     Returns:
         list: Sorted list of players based on scores
-    """
+    """                                                                                                                    
     global players                                                                                                       
     def extract_score(player_str):
         try:
