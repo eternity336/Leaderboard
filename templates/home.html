@@ -12,13 +12,16 @@
         <div class="padding center">
             <h1 class="center banner">Welcome to the Leaderboard</h1>
             
-            <!-- Font Selector Dropdown - Hidden but configurable -->
-            <div class="font-selector hidden">
-                <label for="font-family">Choose Font: </label>
-                <select id="font-family" onchange="changeFont()">
-                    <option value="">Default Font</option>
-                    <!-- Options will be populated by JavaScript -->
-                </select>
+            <!-- Sidebar Font Selector -->
+            <div class="font-sidebar">
+                <div class="font-toggle">⚙️</div>
+                <div class="font-dropdown">
+                    <label for="font-family">Choose Font: </label>
+                    <select id="font-family" onchange="changeFont()">
+                        <option value="">Default Font</option>
+                        <!-- Options will be populated by JavaScript -->
+                    </select>
+                </div>
             </div>
             
             <table class='showplayerstable'>
