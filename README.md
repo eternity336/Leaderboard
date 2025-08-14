@@ -39,9 +39,9 @@ A simple web application that displays player scores and allows updating player 
    pip install -r requirements.txt
    ```
 
-2. Run the application:
+2. Run the application using gunicorn:
    ```
-   python app.py
+   gunicorn --bind 0.0.0.0:5000 app:app
    ```
 
 3. Access the leaderboard at `http://localhost:5000`
@@ -58,9 +58,9 @@ A simple web application that displays player scores and allows updating player 
    pip install -r requirements_windows.txt
    ```
 
-2. Run the application:
+2. Run the application using waitress:
    ```
-   python app.py
+   waitress-serve --host=0.0.0.0 --port=5000 app:app
    ```
 
 3. Access the leaderboard at `http://localhost:5000`
