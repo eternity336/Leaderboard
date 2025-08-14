@@ -84,9 +84,10 @@ To update player data, send a POST request to `/update_players` endpoint with JS
 
 Each player object should contain:                                                                                       
                                                                                                                          
-- `name`: Player's name (required)                                                                                       
-                                                                                                                         
-- Task names: Score values for each task defined in config.yaml                                                          
+- `name`: Player's name (required)
+- Task names: Score values for each task defined in config.yaml
+  - Task names are not case sensitive
+  - Task names can have spaces and underscores
 
 The server will process the data and update the leaderboard accordingly.                                                 
 ## Configuration                                                                                        
@@ -104,6 +105,8 @@ leaderboard:
     - name: task_3
       weight: 50
 ```
+## Themes and Fonts
+The application has a few themes and fonts available.  If you'd prefer a different font then you can drop the ttf file into the styles/fonts folder.
 
 ## API Endpoints
 
@@ -112,6 +115,4 @@ leaderboard:
 - `POST /update_players` - Update player information
 
 ## References
-If you'd like to use a specific font just drop the ttf file in the styles/fonts folder.
-
 Fonts from [1001fonts](https://www.1001fonts.com/)
