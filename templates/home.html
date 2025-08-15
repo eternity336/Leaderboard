@@ -12,7 +12,7 @@
     {% endif %}
     <link rel="icon" type="image/icon" href="{{url_for('static',filename='images/leaderboardicon.png')}}"/>
 </head>
-<body class="{{ theme }}-theme">
+<body class="matrix-theme">
     <div class="server_body">    
         <div class="padding center">
             <h1 class="center banner">Welcome to the Leaderboard</h1>
@@ -167,11 +167,11 @@
         function changeTheme() {
             const selectedTheme = document.getElementById('theme-selector').value;
             
-            // Remove all theme classes
-            document.body.classList.remove('matrix-theme', 'cyberpunk-theme', 'neon-theme', 'retro-theme');
+            // Remove all theme classes except matrix
+            document.body.classList.remove('cyberpunk-theme', 'neon-theme', 'retro-theme');
             
             // Add the selected theme class
-            if (selectedTheme) {
+            if (selectedTheme && selectedTheme !== 'matrix') {
                 document.body.classList.add(selectedTheme + '-theme');
             }
             
@@ -192,8 +192,10 @@
             {% endif %}
             
             // Set initial theme if specified in config
-            {% if theme %}
+            {% if theme and theme != 'matrix' %}
                 document.getElementById('theme-selector').value = "{{ theme }}";
+                // Apply the theme from config
+                loadTheme("{{ theme }}");
             {% endif %}
         });
     </script>

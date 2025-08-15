@@ -101,11 +101,11 @@ function updateTaskScores() {
  * @param {string} themeName - Name of the theme to load
  */
 function loadTheme(themeName) {
-    // Remove existing theme classes
-    document.body.classList.remove('matrix-theme', 'cyberpunk-theme', 'neon-theme', 'retro-theme');
+    // Remove existing theme classes (but keep matrix as default)
+    document.body.classList.remove('cyberpunk-theme', 'neon-theme', 'retro-theme');
     
     // Add the selected theme class
-    if (themeName) {
+    if (themeName && themeName !== 'matrix') {
         document.body.classList.add(themeName + '-theme');
     }
     
