@@ -1,4 +1,159 @@
 /* Cyberpunk Theme */
+html {
+  font-family: cyberpunk;
+  font-size: 40px;
+  background-color: #000000;
+  text-shadow: 0px 0px 10px #ffffff;
+  color: #ff00ff;
+}
+
+.center{
+  text-align: center;
+}
+
+.title{
+  display: block;
+  font-size: 40px;
+  font-style: bold;
+  text-shadow: 0px 0px 10px #ffffff;
+  color: #ff00ff;
+  padding: 5px;
+  background-color: #330033;
+}
+
+.server_body {
+  display: grid;
+  grid-template-columns: auto;
+  grid-gap: 1%;
+}
+
+.padding {
+  width: 98%;
+  padding: 1%;
+}
+
+table.showplayerstable {
+  border: 1px solid #330033;
+  background-color: #220022;
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+table.showplayerstable td, table.showplayerstable th {
+  border: 5px solid #ff00ff;
+  padding: 3px 2px;
+}
+
+table.showplayerstable tbody td {
+  font-size: 30px;
+  font-weight: bold;
+  text-shadow: 0px 0px 10px #ffffff;
+  color: #ff00ff;
+}
+
+table.showplayerstable tr:nth-child(even) {
+  background: #330033;
+}
+
+table.showplayerstable thead {
+  background: #330033;
+  border-bottom: 0px solid #444444;
+}
+
+table.showplayerstable thead th {
+  font-size: 30px;
+  font-weight: bold;
+  text-shadow: 0px 0px 10px #ffffff;
+  color: #ff00ff;
+  text-align: center;
+}
+
+/* Sidebar styles */
+.sidebar-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.font-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  margin-bottom: 15px;
+  background-color: #333;
+  color: white;
+}
+
+.font-toggle:hover {
+  background-color: #b0b8b1;
+  transform: scale(1.1);
+}
+
+.sidebar-dropdowns {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.font-dropdown,
+.theme-dropdown {
+  background-color: #333;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  width: 200px;
+  margin-bottom: 10px;
+  z-index: 1001;
+  display: block;
+}
+
+.theme-dropdown {
+  margin-bottom: 0;
+}
+
+.sidebar-container:hover .font-dropdown,
+.sidebar-container:hover .theme-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.font-dropdown label,
+.theme-dropdown label {
+  color: white;
+  font-weight: bold;
+  margin-right: 10px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.font-dropdown select,
+.theme-dropdown select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  background-color: white;
+}
+
+/* Cyberpunk Theme */
 .cyberpunk-theme {
   background-color: #000000;
   color: #ff00ff;
