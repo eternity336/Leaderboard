@@ -187,7 +187,8 @@
             // Set initial font if specified in config
             {% if font %}
                 document.getElementById('font-family').value = "{{ font }}";
-                changeFont();
+                // Apply the font from config
+                loadFont("{{ font }}");
             {% endif %}
             
             // Set initial theme if specified in config

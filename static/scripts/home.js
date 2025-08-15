@@ -124,6 +124,39 @@ function loadTheme(themeName) {
     }
 }
 
+/**
+ * Load and apply a font dynamically
+ * @param {string} fontName - Name of the font to load
+ */
+function loadFont(fontName) {
+    // Remove existing font styles
+    const existingFontStyles = document.querySelectorAll('style[data-font]');
+    existingFontStyles.forEach(style => style.remove());
+    
+    if (fontName) {
+        // Create new font-face style
+        const fontStyle = document.createElement('style');
+        fontStyle.id = 'dynamic-font';
+        fontStyle.setAttribute('data-font', fontName);
+        
+        // Get the actual font file name from the fonts directory
+        const fontFile = fontName + '.ttf'; // Assuming .ttf extension
+        
+        // Add the font-face rule
+        fontStyle.textContent = `
+            @font-face {
+                font-family: 'ConfigFont';
+                src: url('/static/styles/fonts/${fontFile}') format('truetype');
+            }
+            html, body {
+                font-family: 'ConfigFont', sans-serif !important;
+            }
+        `;
+        
+        document.head.appendChild(fontStyle);
+    }
+}
+
 // Initialize with matrix theme by default
 document.addEventListener('DOMContentLoaded', function() {
     // Set the matrix theme as default
