@@ -95,6 +95,26 @@ function refreshData() {
 function updateTaskScores() {
 }
 
+/**
+ * Load and apply a theme dynamically
+ * @param {string} themeName - Name of the theme to load
+ */
+function loadTheme(themeName) {
+    // Remove existing theme stylesheets
+    const existingThemes = document.querySelectorAll('link[data-theme]');
+    existingThemes.forEach(link => link.remove());
+    
+    // Only load if it's not the default matrix theme
+    if (themeName && themeName !== 'matrix') {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = `/static/styles/themes/${themeName}.css`;
+        link.setAttribute('data-theme', themeName);
+        document.head.appendChild(link);
+    }
+}
+
 if (interval_timer == ""){
     interval_timer = setInterval(function() {
         refreshData();
