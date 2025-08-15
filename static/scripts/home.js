@@ -104,7 +104,7 @@ function loadTheme(themeName) {
     document.body.classList.remove('matrix-theme', 'cyberpunk-theme', 'neon-theme', 'retro-theme');
     
     // Add the selected theme class
-    if (themeName && themeName !== 'matrix') {
+    if (themeName) {
         document.body.classList.add(themeName + '-theme');
     }
     
