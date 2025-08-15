@@ -44,10 +44,11 @@ function create_player_row(player_name, player_score, tasks, task_scores_str) {
         let taskCell = row.insertCell(i + 1);
         taskCell.id = `task-${player_name}-${i}`;
         let task_name = tasks[i].name;
+        let max_score = tasks[i].weight || 100; // Default to 100 if no weight specified
         if (task_scores[task_name] !== undefined) {
-            taskCell.innerHTML = task_scores[task_name];
+            taskCell.innerHTML = `${task_scores[task_name]}/${max_score}`;
         } else {
-            taskCell.innerHTML = "0";
+            taskCell.innerHTML = `0/${max_score}`;
         }
     }
 
