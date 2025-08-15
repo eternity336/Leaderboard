@@ -2,7 +2,6 @@
   font-family: cyberpunk;
   src: url(fonts/BoldPixels1.4.ttf);
 }
-html {
   font-family: cyberpunk;
   font-size: 40px;
   background-color: #000000;
@@ -60,4 +59,4 @@ table.showplayerstable thead th {
   text-shadow: 0px 0px 10px #000000;
   color: #FFFFFF;
   text-align: center;
-}
+} */
