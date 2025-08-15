@@ -44,7 +44,7 @@ function create_player_row(player_name, player_score, tasks, task_scores_str) {
         let taskCell = row.insertCell(i + 1);
         taskCell.id = `task-${player_name}-${i}`;
         let task_name = tasks[i].name;
-        let max_score = tasks[i].weight || 100; // Default to 100 if no weight specified
+        let max_score = tasks[i].weight || 100;
         if (task_scores[task_name] !== undefined) {
             taskCell.innerHTML = `${task_scores[task_name]}/${max_score}`;
         } else {
@@ -101,20 +101,16 @@ function updateTaskScores() {
  * @param {string} themeName - Name of the theme to load
  */
 function loadTheme(themeName) {
-    // Remove existing theme classes (but keep matrix as default)
-    document.body.classList.remove('cyberpunk-theme', 'neon-theme', 'retro-theme');
+    document.body.classList.remove(...[...document.body.classList].filter(cls => cls.endsWith('-theme')));
     
-    // Add the selected theme class
-    if (themeName && themeName !== 'matrix') {
+    if (themeName) {
         document.body.classList.add(themeName + '-theme');
     }
     
-    // Remove existing theme stylesheets
     const existingThemes = document.querySelectorAll('link[data-theme]');
     existingThemes.forEach(link => link.remove());
     
-    // Only load if it's not the default matrix theme
-    if (themeName && themeName !== 'matrix') {
+    if (themeName) {
         const link = document.createElement('link');
         link.rel = 'stylesheet';
         link.type = 'text/css';
@@ -129,20 +125,16 @@ function loadTheme(themeName) {
  * @param {string} fontName - Name of the font to load
  */
 function loadFont(fontName) {
-    // Remove existing font styles
     const existingFontStyles = document.querySelectorAll('style[data-font]');
     existingFontStyles.forEach(style => style.remove());
     
     if (fontName) {
-        // Create new font-face style
         const fontStyle = document.createElement('style');
         fontStyle.id = 'dynamic-font';
         fontStyle.setAttribute('data-font', fontName);
         
-        // Get the actual font file name from the fonts directory
-        const fontFile = fontName + '.ttf'; // Assuming .ttf extension
+        const fontFile = fontName + '.ttf';
         
-        // Add the font-face rule
         fontStyle.textContent = `
             @font-face {
                 font-family: 'ConfigFont';
@@ -157,10 +149,8 @@ function loadFont(fontName) {
     }
 }
 
-// Initialize with matrix theme by default
 document.addEventListener('DOMContentLoaded', function() {
-    // Set the matrix theme as default
-    document.body.classList.add('matrix-theme');
+    document.body.classList.add('default-theme');
     
     if (interval_timer == ""){
         interval_timer = setInterval(function() {

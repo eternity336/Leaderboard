@@ -104,9 +104,13 @@ leaderboard:
       weight: 30
     - name: task_3
       weight: 50
+   font: "BoldPixel1.4"
+   theme: "default"
 ```
+
+Additionally you can call out your default theme and font for easier automation.
 ## Themes and Fonts
-The application has a few themes and fonts available.  If you'd prefer a different font then you can drop the ttf file into the styles/fonts folder.
+The application has a few themes and fonts available.  If you'd prefer a different font then you can drop the ttf file into the styles/fonts folder.  For additonal themes use the template.css and copy it to the static/styles/themes/ folder.  Rename it to your theme and it's show up in the drop down.
 
 ## API Endpoints
 

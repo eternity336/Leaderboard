@@ -20,5 +20,5 @@ leaderboard:
       weight: 50
     - name: Task 10
       weight: 50
-  font: "Atyan Dsegh regular.ttf"
-  theme: "matrix"
+  font: "BoldPixels1.4"
+  theme: "neon"
