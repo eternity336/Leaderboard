@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/styles.css')}}"/>
     <link rel="icon" type="image/icon" href="{{url_for('static',filename='images/leaderboardicon.png')}}"/>
 </head>
-<body>
+<body class="matrix-theme">
     <div class="server_body">    
         <div class="padding center">
             <h1 class="center banner">Welcome to the Leaderboard</h1>
@@ -178,7 +178,6 @@
         $(document).ready(function() {
             populateFontSelector();
             populateThemeSelector();
-            refreshData();
         });
     </script>
 </body>

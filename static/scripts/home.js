@@ -100,6 +100,14 @@ function updateTaskScores() {
  * @param {string} themeName - Name of the theme to load
  */
 function loadTheme(themeName) {
+    // Remove existing theme classes
+    document.body.classList.remove('matrix-theme', 'cyberpunk-theme', 'neon-theme', 'retro-theme');
+    
+    // Add the selected theme class
+    if (themeName && themeName !== 'matrix') {
+        document.body.classList.add(themeName + '-theme');
+    }
+    
     // Remove existing theme stylesheets
     const existingThemes = document.querySelectorAll('link[data-theme]');
     existingThemes.forEach(link => link.remove());
@@ -115,9 +123,15 @@ function loadTheme(themeName) {
     }
 }
 
-if (interval_timer == ""){
-    interval_timer = setInterval(function() {
-        refreshData();
-    }, 5000)
-}
-refreshData();
+// Initialize with matrix theme by default
+document.addEventListener('DOMContentLoaded', function() {
+    // Set the matrix theme as default
+    document.body.classList.add('matrix-theme');
+    
+    if (interval_timer == ""){
+        interval_timer = setInterval(function() {
+            refreshData();
+        }, 5000)
+    }
+    refreshData();
+});
