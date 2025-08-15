@@ -69,6 +69,28 @@ def get_fonts():
         return jsonify({'fonts': []})
 
 
+@app.route("/getthemes")
+def get_themes():
+    """Get list of available themes from the themes directory.
+
+    Returns:
+        JSON response containing list of theme files
+    """
+    themes_dir = 'static/styles/themes'
+    try:
+        if os.path.exists(themes_dir):
+            # Get all CSS files in the themes directory
+            themes = [f for f in os.listdir(themes_dir) if f.endswith('.css') and f != 'styles.css']
+            # Remove .css extension from filenames for display
+            theme_names = [os.path.splitext(theme)[0] for theme in themes]
+            return jsonify({'themes': theme_names})
+        else:
+            return jsonify({'themes': []})
+    except Exception as e:
+        print(f"Error reading themes directory: {e}")
+        return jsonify({'themes': []})
+
+
 @app.route("/update_players", methods=["POST"])
 def update_players():
     """Update player scores from POST request.

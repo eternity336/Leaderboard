@@ -99,6 +99,31 @@
                 option.textContent = theme.text;
                 themeSelect.appendChild(option);
             });
+            
+            // Load additional themes from server
+            $.ajax({
+                url: "/getthemes",
+                type: 'GET',
+                success: function(data) {
+                    if (data && data.themes && Array.isArray(data.themes)) {
+                        data.themes.forEach(theme => {
+                            // Skip default themes that are already added
+                            const existingThemes = defaultThemes.map(t => t.value);
+                            if (!existingThemes.includes(theme)) {
+                                const option = document.createElement('option');
+                                option.value = theme;
+                                option.textContent = theme.charAt(0).toUpperCase() + theme.slice(1);
+                                themeSelect.appendChild(option);
+                            }
+                        });
+                    } else {
+                        console.error("Invalid themes data received:", data);
+                    }
+                },
+                error: function() {
+                    console.error("Failed to load themes");
+                }
+            });
         }
 
         // Change font function
