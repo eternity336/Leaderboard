@@ -11,11 +11,15 @@ try:
         tasks = config.get('leaderboard', {}).get('tasks', [])
         display_name_field = "name"
         score_fields = [task['name'] for task in tasks]
+        font = config.get('leaderboard', {}).get('font', '')
+        theme = config.get('leaderboard', {}).get('theme', 'matrix')
 except FileNotFoundError:
     print("config.yaml not found. Using default configuration.")
     tasks = []
     display_name_field = "name"
     score_fields = []
+    font = ''
+    theme = 'matrix'
 
 
 @app.route("/")
@@ -23,10 +27,10 @@ def home():
     """Render the home page with leaderboard data.
 
     Returns:
-        Rendered HTML template with players, tasks, and display name field
+        Rendered HTML template with players, tasks, display name field, font and theme
     """
     return render_template('home.html', players=sorted_list_of_players(), tasks=tasks,
-                            display_name_field=display_name_field)
+                            display_name_field=display_name_field, font=font, theme=theme)
 
 
 @app.route("/getdata")
