@@ -134,6 +134,25 @@ table.showplayerstable thead th {
   transform: translateY(0);
 }
 
+.font-dropdown label,
+.theme-dropdown label {
+  color: white;
+  font-weight: bold;
+  margin-right: 10px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.font-dropdown select,
+.theme-dropdown select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  background-color: white;
+}
+
 /* Matrix Theme */
 .matrix-theme {
   background-color: #000000;
