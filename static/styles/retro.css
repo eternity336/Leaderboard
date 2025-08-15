@@ -1,0 +1,34 @@
+/* Retro Theme */
+.retro-theme {
+  background-color: #ffcc00;
+  color: #000000;
+  text-shadow: 0 0 3px #ffffff;
+}
+
+.retro-theme .showplayerstable {
+  border-color: #000000;
+  background-color: #ff9900;
+}
+
+.retro-theme .showplayerstable td,
+.retro-theme .showplayerstable th {
+  border-color: #000000;
+}
+
+.retro-theme .showplayerstable tbody td {
+  color: #000000;
+  text-shadow: 0 0 3px #ffffff;
+}
+
+.retro-theme .showplayerstable thead {
+  background-color: #ff6600;
+}
+
+.retro-theme .showplayerstable thead th {
+  color: #000000;
+  text-shadow: 0 0 3px #ffffff;
+}
+
+.retro-theme .showplayerstable tr:nth-child(even) {
+  background: #ff6600;
+}
