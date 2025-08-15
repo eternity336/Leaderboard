@@ -8,7 +8,7 @@
     {% if theme %}
         <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/themes/' + theme + '.css')}}"/>
     {% else %}
-        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/themes/matrix.css')}}"/>
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/themes/default.css')}}"/>
     {% endif %}
     <link rel="icon" type="image/icon" href="{{url_for('static',filename='images/leaderboardicon.png')}}"/>
 </head>
@@ -83,19 +83,13 @@
             });
         }
 
-        // Populate theme selector with available themes
         function populateThemeSelector() {
             const themeSelect = document.getElementById('theme-selector');
             
-            // Clear existing options except the default
             themeSelect.innerHTML = '';
             
-            // Add default themes
             const defaultThemes = [
-                { value: 'matrix', text: 'Matrix' },
-                { value: 'cyberpunk', text: 'Cyberpunk' },
-                { value: 'neon', text: 'Neon' },
-                { value: 'retro', text: 'Retro' }
+                { value: 'default', text: 'Default' },
             ];
             
             defaultThemes.forEach(theme => {
@@ -105,14 +99,12 @@
                 themeSelect.appendChild(option);
             });
             
-            // Load additional themes from server
             $.ajax({
                 url: "/getthemes",
                 type: 'GET',
                 success: function(data) {
                     if (data && data.themes && Array.isArray(data.themes)) {
                         data.themes.forEach(theme => {
-                            // Skip default themes that are already added
                             const existingThemes = defaultThemes.map(t => t.value);
                             if (!existingThemes.includes(theme)) {
                                 const option = document.createElement('option');
@@ -131,12 +123,10 @@
             });
         }
 
-        // Change font function
         function changeFont() {
             const selectedFont = document.getElementById('font-family').value;
             
             if (selectedFont) {
-                // Create or update font-face style
                 let fontStyle = document.getElementById('dynamic-font');
                 if (!fontStyle) {
                     fontStyle = document.createElement('style');
@@ -168,33 +158,26 @@
             const selectedTheme = document.getElementById('theme-selector').value;
             
             // Remove all theme classes except matrix
-            document.body.classList.remove('cyberpunk-theme', 'neon-theme', 'retro-theme');
+            document.body.classList.remove(...[...document.body.classList].filter(cls => cls.endsWith('-theme')));
             
-            // Add the selected theme class
-            if (selectedTheme && selectedTheme !== 'matrix') {
+            if (selectedTheme) {
                 document.body.classList.add(selectedTheme + '-theme');
             }
             
-            // Load and apply the theme dynamically
             loadTheme(selectedTheme);
         }
 
-        // Initialize the page
         $(document).ready(function() {
             populateFontSelector();
             populateThemeSelector();
             
-            // Set initial font if specified in config
             {% if font %}
                 document.getElementById('font-family').value = "{{ font }}";
-                // Apply the font from config
                 loadFont("{{ font }}");
             {% endif %}
             
-            // Set initial theme if specified in config
-            {% if theme and theme != 'matrix' %}
+            {% if theme  %}
                 document.getElementById('theme-selector').value = "{{ theme }}";
-                // Apply the theme from config
                 loadTheme("{{ theme }}");
             {% endif %}
         });
