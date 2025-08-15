@@ -26,10 +26,7 @@
                     <div class="theme-dropdown">
                         <label for="theme-selector">Theme: </label>
                         <select id="theme-selector" onchange="changeTheme()">
-                            <option value="matrix">Matrix</option>
-                            <option value="cyberpunk">Cyberpunk</option>
-                            <option value="neon">Neon</option>
-                            <option value="retro">Retro</option>
+                            <!-- Options will be populated by JavaScript -->
                         </select>
                     </div>
                 </div>
@@ -81,6 +78,29 @@
             });
         }
 
+        // Populate theme selector with available themes
+        function populateThemeSelector() {
+            const themeSelect = document.getElementById('theme-selector');
+            
+            // Clear existing options except the default
+            themeSelect.innerHTML = '';
+            
+            // Add default themes
+            const defaultThemes = [
+                { value: 'matrix', text: 'Matrix' },
+                { value: 'cyberpunk', text: 'Cyberpunk' },
+                { value: 'neon', text: 'Neon' },
+                { value: 'retro', text: 'Retro' }
+            ];
+            
+            defaultThemes.forEach(theme => {
+                const option = document.createElement('option');
+                option.value = theme.value;
+                option.textContent = theme.text;
+                themeSelect.appendChild(option);
+            });
+        }
+
         // Change font function
         function changeFont() {
             const selectedFont = document.getElementById('font-family').value;
@@ -121,12 +141,15 @@
             document.body.classList.remove('matrix-theme', 'cyberpunk-theme', 'neon-theme', 'retro-theme');
             
             // Add the selected theme class
-            document.body.classList.add(selectedTheme + '-theme');
+            if (selectedTheme) {
+                document.body.classList.add(selectedTheme + '-theme');
+            }
         }
 
         // Initialize the page
         $(document).ready(function() {
             populateFontSelector();
+            populateThemeSelector();
             refreshData();
         });
     </script>
