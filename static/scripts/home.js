@@ -150,6 +150,127 @@ function loadFont(fontName) {
 }
 
 /**
+ * Populate font selector with available fonts
+ */
+function populateFontSelector() {
+    $.ajax({
+        url: "/getfonts",
+        type: 'GET',
+        success: function(data) {
+            const fontSelect = document.getElementById('font-family');
+            // Clear existing options except the default
+            fontSelect.innerHTML = '<option value="">Default Font</option>';
+            
+            if (data && data.fonts && Array.isArray(data.fonts)) {
+                data.fonts.forEach(font => {
+                    const option = document.createElement('option');
+                    option.value = font;
+                    option.textContent = font.replace('.ttf', '').replace('.otf', '');
+                    fontSelect.appendChild(option);
+                });
+            } else {
+                console.error("Invalid fonts data received:", data);
+            }
+        },
+        error: function() {
+            console.error("Failed to load fonts");
+        }
+    });
+}
+
+/**
+ * Populate theme selector with available themes
+ */
+function populateThemeSelector() {
+    const themeSelect = document.getElementById('theme-selector');
+    
+    themeSelect.innerHTML = '';
+    
+    const defaultThemes = [
+        { value: 'default', text: 'Default' },
+    ];
+    
+    defaultThemes.forEach(theme => {
+        const option = document.createElement('option');
+        option.value = theme.value;
+        option.textContent = theme.text;
+        themeSelect.appendChild(option);
+    });
+    
+    $.ajax({
+        url: "/getthemes",
+        type: 'GET',
+        success: function(data) {
+            if (data && data.themes && Array.isArray(data.themes)) {
+                data.themes.forEach(theme => {
+                    const existingThemes = defaultThemes.map(t => t.value);
+                    if (!existingThemes.includes(theme)) {
+                        const option = document.createElement('option');
+                        option.value = theme;
+                        option.textContent = theme.charAt(0).toUpperCase() + theme.slice(1);
+                        themeSelect.appendChild(option);
+                    }
+                });
+            } else {
+                console.error("Invalid themes data received:", data);
+            }
+        },
+        error: function() {
+            console.error("Failed to load themes");
+        }
+    });
+}
+
+/**
+ * Change font dynamically
+ */
+function changeFont() {
+    const selectedFont = document.getElementById('font-family').value;
+    
+    if (selectedFont) {
+        let fontStyle = document.getElementById('dynamic-font');
+        if (!fontStyle) {
+            fontStyle = document.createElement('style');
+            fontStyle.id = 'dynamic-font';
+            document.head.appendChild(fontStyle);
+        }
+        
+        // Load the selected font
+        fontStyle.textContent = `
+            @font-face {
+                font-family: 'SelectedFont';
+                src: url('/static/styles/fonts/${selectedFont}') format('truetype');
+            }
+            html, body {
+                font-family: 'SelectedFont', sans-serif !important;
+            }
+        `;
+    } else {
+        // Reset to default font
+        const fontStyle = document.getElementById('dynamic-font');
+        if (fontStyle) {
+            fontStyle.remove();
+        }
+    }
+}
+
+/**
+ * Change theme dynamically
+ */
+function changeTheme() {
+    const selectedTheme = document.getElementById('theme-selector').value;
+    
+    // Remove all theme classes except matrix
+    document.body.classList.remove(...[...document.body.classList].filter(cls => cls.endsWith('-theme')));
+    
+    if (selectedTheme) {
+        document.body.classList.add(selectedTheme + '-theme');
+    }
+    
+    loadTheme(selectedTheme);
+}
+
+/**
  * Toggle sidebar visibility
  */
 function toggleSidebar() {
