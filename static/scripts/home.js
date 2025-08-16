@@ -149,8 +149,34 @@ function loadFont(fontName) {
     }
 }
 
+/**
+ * Toggle sidebar visibility
+ */
+function toggleSidebar() {
+    const fontDropdown = document.querySelector('.font-dropdown');
+    const themeDropdown = document.querySelector('.theme-dropdown');
+    
+    if (fontDropdown.style.opacity === '1') {
+        fontDropdown.style.opacity = '0';
+        fontDropdown.style.visibility = 'hidden';
+        themeDropdown.style.opacity = '0';
+        themeDropdown.style.visibility = 'hidden';
+    } else {
+        fontDropdown.style.opacity = '1';
+        fontDropdown.style.visibility = 'visible';
+        themeDropdown.style.opacity = '1';
+        themeDropdown.style.visibility = 'visible';
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-    document.body.classList.add('default-theme');
+    document.body.classList.add('matrix-theme');
+    
+    // Add click event to the toggle button
+    const toggleButton = document.querySelector('.font-toggle');
+    if (toggleButton) {
+        toggleButton.addEventListener('click', toggleSidebar);
+    }
     
     if (interval_timer == ""){
         interval_timer = setInterval(function() {
