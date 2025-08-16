@@ -75,11 +75,20 @@ A simple web application that displays player scores and allows updating player 
 To update player data, send a POST request to `/update_players` endpoint with JSON data in the following format:
 
 ```
-[{                                                                                                        "name": "Player1",
-    "task_1": 50,
-    "task_2": 75,
-    "task_3":25
-}]
+[
+    {
+        "name": "The Matrix Revolution",
+        "task 1": 10,
+        "task 2": 20,
+        "task 3": 30
+    },
+    {
+        "name": "Brute Force",
+        "task 1": 5,
+        "task 2": 15,
+        "task 3": 25
+    }
+]
 ```
 
 Each player object should contain:                                                                                       
