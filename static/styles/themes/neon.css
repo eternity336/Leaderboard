@@ -1,10 +1,10 @@
-/* Base styles for the leaderboard */
+/* Neon Theme */
 html {
   font-family: cyberpunk;
   font-size: 40px;
   background-color: #000000;
   text-shadow: 0px 0px 10px #ffffff;
-  color: #40ff00;
+  color: #00ffff;
 }
 
 .center{
@@ -16,9 +16,9 @@ html {
   font-size: 40px;
   font-style: bold;
   text-shadow: 0px 0px 10px #ffffff;
-  color: #40ff00;
+  color: #00ffff;
   padding: 5px;
-  background-color: #073d04;
+  background-color: #003333;
 }
 
 .server_body {
@@ -33,15 +33,15 @@ html {
 }
 
 table.showplayerstable {
-  border: 1px solid #073d04;
-  background-color: #336f30;
+  border: 1px solid #003333;
+  background-color: #002222;
   width: 100%;
   text-align: center;
   border-collapse: collapse;
 }
 
 table.showplayerstable td, table.showplayerstable th {
-  border: 5px solid #000000;
+  border: 5px solid #00ffff;
   padding: 3px 2px;
 }
 
@@ -49,15 +49,15 @@ table.showplayerstable tbody td {
   font-size: 30px;
   font-weight: bold;
   text-shadow: 0px 0px 10px #ffffff;
-  color: #40ff00;
+  color: #00ffff;
 }
 
 table.showplayerstable tr:nth-child(even) {
-  background: #219c2d;
+  background: #003333;
 }
 
 table.showplayerstable thead {
-  background: #226428;
+  background: #003333;
   border-bottom: 0px solid #444444;
 }
 
@@ -65,7 +65,7 @@ table.showplayerstable thead th {
   font-size: 30px;
   font-weight: bold;
   text-shadow: 0px 0px 10px #ffffff;
-  color: #FFFFFF;
+  color: #00ffff;
   text-align: center;
 }
 
@@ -127,9 +127,63 @@ table.showplayerstable thead th {
   margin-bottom: 0;
 }
 
-/* Initially hide the dropdowns */
-.font-dropdown,
-.theme-dropdown {
-  opacity: 0;
-  visibility: hidden;
+.sidebar-container:hover .font-dropdown,
+.sidebar-container:hover .theme-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.font-dropdown label,
+.theme-dropdown label {
+  color: white;
+  font-weight: bold;
+  margin-right: 10px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.font-dropdown select,
+.theme-dropdown select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  background-color: white;
+}
+
+/* Neon Theme */
+.neon-theme {
+  background-color: #000000;
+  color: #00ffff;
+  text-shadow: 0 0 5px #ffffff;
+}
+
+.neon-theme .showplayerstable {
+  border-color: #00ffff;
+  background-color: #002222;
+}
+
+.neon-theme .showplayerstable td,
+.neon-theme .showplayerstable th {
+  border-color: #00ffff;
+}
+
+.neon-theme .showplayerstable tbody td {
+  color: #00ffff;
+  text-shadow: 0 0 5px #ffffff;
+}
+
+.neon-theme .showplayerstable thead {
+  background-color: #003333;
+}
+
+.neon-theme .showplayerstable thead th {
+  color: #00ffff;
+  text-shadow: 0 0 5px #ffffff;
+}
+
+.neon-theme .showplayerstable tr:nth-child(even) {
+  background: #003333;
 }

@@ -1,24 +1,59 @@
 <!doctype html>
-<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/styles.css')}}"/>
-<link rel="icon" type="image/icon" href="{{url_for('static',filename='images/leaderboardicon.png')}}"/>
-
-<title>Welcome to the Leaderboard</title>
-<H1 class="center banner">Welcome to the Leaderboard</H1>
-</div>
-<div class="server_body">    
-    <div class="padding center">
-        <label class="center title">Players/Teams</label>
-        <table class='showplayerstable'>
-            <thead>
-            <tr>
-                <th>Player/Team Name</th> 
-                <th>Score</th>
-            </tr>
-            </thead>
-            <tbody id='players'>
-            </tbody>
-        </table>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/styles.css')}}"/>
+    {% if theme %}
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/themes/' + theme + '.css')}}"/>
+    {% else %}
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/themes/default.css')}}"/>
+    {% endif %}
+    <link rel="icon" type="image/icon" href="{{url_for('static',filename='images/leaderboardicon.png')}}"/>
+</head>
+<body class="matrix-theme">
+    <div class="server_body">    
+        <div class="padding center">
+            <h1 class="center banner">Welcome to the Leaderboard</h1>
+            
+            <!-- Sidebar Container -->
+            <div class="sidebar-container">
+                <div class="font-toggle">⚙️</div>
+                <div class="sidebar-dropdowns">
+                    <div class="font-dropdown">
+                        <label for="font-family">Font: </label>
+                        <select id="font-family" onchange="changeFont()">
+                            <option value="">Default Font</option>
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    <div class="theme-dropdown">
+                        <label for="theme-selector">Theme: </label>
+                        <select id="theme-selector" onchange="changeTheme()">
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <table class='showplayerstable'>
+                <thead>
+                <tr>
+                    <th>Player/Team Name</th>
+                    {% for task in tasks %}
+                    <th>{{ task['name'] }}</th>
+                    {% endfor %}
+                    <th>Total Score</th>
+                </tr>
+                </thead>
+                <tbody id='players'>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
-<script src="{{url_for('static', filename='scripts/home.js')}}"></script>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="{{url_for('static', filename='scripts/home.js')}}"></script>
+</body>
+</html>

@@ -1,4 +1,12 @@
-/* Base styles for the leaderboard */
+/* Template for creating new themes */
+/* 
+   To create a new theme:
+   1. Copy this file and rename it to your theme name (e.g., mytheme.css)
+   2. Modify the colors and styles below
+   3. The application will automatically detect and load your new theme
+*/
+
+/* Base theme styles - these should be kept consistent across all themes */
 html {
   font-family: cyberpunk;
   font-size: 40px;
@@ -127,9 +135,75 @@ table.showplayerstable thead th {
   margin-bottom: 0;
 }
 
-/* Initially hide the dropdowns */
-.font-dropdown,
-.theme-dropdown {
-  opacity: 0;
-  visibility: hidden;
+.sidebar-container:hover .font-dropdown,
+.sidebar-container:hover .theme-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.font-dropdown label,
+.theme-dropdown label {
+  color: white;
+  font-weight: bold;
+  margin-right: 10px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.font-dropdown select,
+.theme-dropdown select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  background-color: white;
+}
+
+/* Theme-specific styles - these should be customized for each theme */
+/* 
+   Replace the following placeholder classes with your actual theme styles.
+   Each theme should have its own unique styling but maintain the same structure.
+*/
+
+/* Example theme class (replace with your theme name) */
+.mytheme-theme {
+  /* Background color */
+  background-color: #000000;
+  
+  /* Text color */
+  color: #40ff00;
+  
+  /* Text shadow for better visibility */
+  text-shadow: 0 0 3px #ffffff;
+}
+
+/* Example theme table styling */
+.mytheme-theme .showplayerstable {
+  border-color: #00ff00;
+  background-color: #002200;
+}
+
+.mytheme-theme .showplayerstable td,
+.mytheme-theme .showplayerstable th {
+  border-color: #00ff00;
+}
+
+.mytheme-theme .showplayerstable tbody td {
+  color: #00ff00;
+  text-shadow: 0 0 3px #ffffff;
+}
+
+.mytheme-theme .showplayerstable thead {
+  background-color: #003300;
+}
+
+.mytheme-theme .showplayerstable thead th {
+  color: #00ff00;
+  text-shadow: 0 0 3px #ffffff;
+}
+
+.mytheme-theme .showplayerstable tr:nth-child(even) {
+  background: #003300;
 }

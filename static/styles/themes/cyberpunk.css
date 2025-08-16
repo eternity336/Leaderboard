@@ -1,10 +1,10 @@
-/* Base styles for the leaderboard */
+/* Cyberpunk Theme */
 html {
   font-family: cyberpunk;
   font-size: 40px;
   background-color: #000000;
   text-shadow: 0px 0px 10px #ffffff;
-  color: #40ff00;
+  color: #ff00ff;
 }
 
 .center{
@@ -16,9 +16,9 @@ html {
   font-size: 40px;
   font-style: bold;
   text-shadow: 0px 0px 10px #ffffff;
-  color: #40ff00;
+  color: #ff00ff;
   padding: 5px;
-  background-color: #073d04;
+  background-color: #330033;
 }
 
 .server_body {
@@ -33,15 +33,15 @@ html {
 }
 
 table.showplayerstable {
-  border: 1px solid #073d04;
-  background-color: #336f30;
+  border: 1px solid #330033;
+  background-color: #220022;
   width: 100%;
   text-align: center;
   border-collapse: collapse;
 }
 
 table.showplayerstable td, table.showplayerstable th {
-  border: 5px solid #000000;
+  border: 5px solid #ff00ff;
   padding: 3px 2px;
 }
 
@@ -49,15 +49,15 @@ table.showplayerstable tbody td {
   font-size: 30px;
   font-weight: bold;
   text-shadow: 0px 0px 10px #ffffff;
-  color: #40ff00;
+  color: #ff00ff;
 }
 
 table.showplayerstable tr:nth-child(even) {
-  background: #219c2d;
+  background: #330033;
 }
 
 table.showplayerstable thead {
-  background: #226428;
+  background: #330033;
   border-bottom: 0px solid #444444;
 }
 
@@ -65,7 +65,7 @@ table.showplayerstable thead th {
   font-size: 30px;
   font-weight: bold;
   text-shadow: 0px 0px 10px #ffffff;
-  color: #FFFFFF;
+  color: #ff00ff;
   text-align: center;
 }
 
@@ -127,9 +127,63 @@ table.showplayerstable thead th {
   margin-bottom: 0;
 }
 
-/* Initially hide the dropdowns */
-.font-dropdown,
-.theme-dropdown {
-  opacity: 0;
-  visibility: hidden;
+.sidebar-container:hover .font-dropdown,
+.sidebar-container:hover .theme-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.font-dropdown label,
+.theme-dropdown label {
+  color: white;
+  font-weight: bold;
+  margin-right: 10px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.font-dropdown select,
+.theme-dropdown select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  background-color: white;
+}
+
+/* Cyberpunk Theme */
+.cyberpunk-theme {
+  background-color: #000000;
+  color: #ff00ff;
+  text-shadow: 0 0 5px #8553827b;
+}
+
+.cyberpunk-theme .showplayerstable {
+  border-color: #ff00ff;
+  background-color: #220022;
+}
+
+.cyberpunk-theme .showplayerstable td,
+.cyberpunk-theme .showplayerstable th {
+  border-color: #ff00ff;
+}
+
+.cyberpunk-theme .showplayerstable tbody td {
+  color: #ff00ff;
+  text-shadow: 0 0 5px #8553827b;
+}
+
+.cyberpunk-theme .showplayerstable thead {
+  background-color: #330033;
+}
+
+.cyberpunk-theme .showplayerstable thead th {
+  color: #ff00ff;
+  text-shadow: 0 0 5px #8553827b;
+}
+
+.cyberpunk-theme .showplayerstable tr:nth-child(even) {
+  background: #330033;
 }

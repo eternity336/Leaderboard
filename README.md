@@ -1,74 +1,122 @@
 # Simple Leaderboard Server
+![image](screenshot/ScreenshotLeaderboard.png)
+A simple web application that displays player scores and allows updating player data via HTTP requests.
 
-![image](https://github.com/eternity336/Leaderboard/blob/main/screenshot/ScreenshotLeaderboard.png)
+## Features
 
+- Displays player leaderboard with scores
+- Real-time updates through AJAX
+- Supports Docker deployment
+- Cross-platform compatibility (Linux, Windows)
 
-Intended as a simple Leaderboard server.  This is not inherently secure and I would not advise making this public facing.  However it will work great internally.  It was built with Python, HTML, JQuery and Javascript.
----
+## Running with Docker Compose
 
-Currently this allows you to:
-- Monitor Players/Teams Scores
-- Push Scores via an API
+### Prerequisites
+- Docker and Docker Compose installed on your system
 
----
-To push player data to server use a post
+### Steps
+1. Run the application using Docker Compose:
+   ```
+   docker-compose up
+   ```
 
-    curl --location 'localhost:8000/update_players' --header 'Content-Type: application/json' --data '["joshua, 100","john, 316","sam, 56"]'
+2. Access the leaderboard at `http://localhost:8080`
 
+3. To run in detached mode:
+   ```
+   docker-compose up -d
+   ```
 
----LINUX---
+4. To stop the containers:
+   ```
+   docker-compose down
+   ```
 
-I deployed using gunicorn and developed this using the latest python3.11.
-So make sure you have python3 install and install the requirements.txt using
+## Running on Linux
 
-    pip install -r requirements.txt
+### Prerequisites
+- Python 3 installed
+- pip installed
 
-and then add the systemd config /etc/systemd/system/leaderboard.service
+### Steps
+1. Install dependencies:
+   ```
+   pip install -r requirements.txt
+   ```
 
-    [Unit]
-    Description=Leaderboard Service
-    After=network.target
+2. Run the application using gunicorn:
+   ```
+   gunicorn --bind 0.0.0.0:5000 app:app
+   ```
 
-    [Service]
-    User=username
-    ExecStart=/bin/gunicorn -b 0.0.0.0:8000 app:app  <-- Make sure this location is correct
-    WorkingDirectory=/path/to/app/ <-- Working dorectory of app
-    ExecReload=/bin/kill -s HUP $MAINPID
-    KillMode=mixed
-    TimeoutStopSec=5
-    Restart=always
+3. Access the leaderboard at `http://localhost:5000`
 
-    [Install]
-    WantedBy=multi-user.target
+## Running on Windows
 
-Once you set the config in place you enable and start it
+### Prerequisites
+- Python 3 installed
+- pip installed
 
-    sudo systemctl enable leaderboard.service
-    sudo systemctl start leaderboard.service
+### Steps
+1. Install dependencies:
+   ```
+   pip install -r requirements_windows.txt
+   ```
 
-You can check the process status via
+2. Run the application using waitress:
+   ```
+   waitress-serve --host=0.0.0.0 --port=5000 app:app
+   ```
 
-    sudo systemctl status leaderboard.service
+3. Access the leaderboard at `http://localhost:5000`
 
-And restart via
+## Updating Player Data
 
-    sudo systemctl restart leaderboard.service
+To update player data, send a POST request to `/update_players` endpoint with JSON data in the following format:
 
-Then you can access the site with 
-    
-    http://< serverIP >:< port >
+```
+[{                                                                                                        "name": "Player1",
+    "task_1": 50,
+    "task_2": 75,
+    "task_3":25
+}]
+```
 
-If you want a different port then 8000 just add the port to the above config after 0.0.0.0 with :port
+Each player object should contain:                                                                                       
+                                                                                                                         
+- `name`: Player's name (required)
+- Task names: Score values for each task defined in config.yaml
+  - Task names are not case sensitive
+  - Task names can have spaces and underscores
 
----WINDOWS---
+The server will process the data and update the leaderboard accordingly.                                                 
+## Configuration                                                                                        
+The application uses `config.yaml` to define tasks. This file specifies the tasks that will appear on the leaderboard along with their maximum weights. The configuration file defines a list of tasks, each with a name and weight value.
 
-Make sure to pip install the requirements_windows.txt
-and then run with waitress since gunicorn doesn't work on Windows.
+Example Configuration:
 
-    waitress-serve --listen=*:8000 app:app
+```yaml
+leaderboard:
+  tasks:
+    - name: task_1
+      weight: 20
+    - name: task_2
+      weight: 30
+    - name: task_3
+      weight: 50
+   font: "BoldPixel1.4"
+   theme: "default"
+```
 
----REFERENCES---
+Additionally you can call out your default theme and font for easier automation.
+## Themes and Fonts
+The application has a few themes and fonts available.  If you'd prefer a different font then you can drop the ttf file into the styles/fonts folder.  For additonal themes use the template.css and copy it to the static/styles/themes/ folder.  Rename it to your theme and it's show up in the drop down.
 
-Font from 
+## API Endpoints
 
-https://www.1001fonts.com/saiba-45-font.html
+- `GET /` - Main leaderboard page
+- `GET /getdata` - Returns current player data
+- `POST /update_players` - Update player information
+
+## References
+Fonts from [1001fonts](https://www.1001fonts.com/)
