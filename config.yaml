@@ -2,23 +2,33 @@ leaderboard:
   tasks:
     - name: Task 1
       weight: 20
+      key: task1
     - name: Task 2
       weight: 30
+      key: task2
     - name: Task 3
       weight: 50
+      key: task3
     - name: Task 4
       weight: 50
+      key: task4
     - name: Task 5
       weight: 50
+      key: task5
     - name: Task 6
       weight: 50
+      key: task6
     - name: Task 7
       weight: 50
+      key: task7
     - name: Task 8
       weight: 50
+      key: task8
     - name: Task 9
       weight: 50
+      key: task9
     - name: Task 10
       weight: 50
+      key: task10
   font: "BoldPixels1.4"
   theme: "neon"
