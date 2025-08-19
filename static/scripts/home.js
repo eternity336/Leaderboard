@@ -1,5 +1,5 @@
-var interval_timer = "";
-var tasks = [];
+let interval_timer = "";
+let tasks = [];
 
 /**
  * Delete all rows from a table
@@ -22,18 +22,18 @@ function create_player_row(player_name, player_score, tasks, task_scores_str) {
         return;
     }
 
-    var playertable = document.getElementById('players');
-    var row = playertable.insertRow(-1);
+    const playertable = document.getElementById('players');
+    const row = playertable.insertRow(-1);
     row.id = `player-${player_name}`;
 
-    var nameCell = row.insertCell(0);
+    const nameCell = row.insertCell(0);
     nameCell.innerHTML = player_name;
 
     let task_scores = {};
     if (task_scores_str) {
-        let score_parts = task_scores_str.split(',');
-        for (let part of score_parts) {
-            let [task_name, score] = part.split(':');
+        const score_parts = task_scores_str.split(',');
+        for (const part of score_parts) {
+            const [task_name, score] = part.split(':');
             if (task_name && score) {
                 task_scores[task_name] = parseInt(score);
             }
@@ -41,10 +41,10 @@ function create_player_row(player_name, player_score, tasks, task_scores_str) {
     }
 
     for (let i = 0; i < tasks.length; i++) {
-        let taskCell = row.insertCell(i + 1);
+        const taskCell = row.insertCell(i + 1);
         taskCell.id = `task-${player_name}-${i}`;
-        let task_name = tasks[i].name;
-        let max_score = tasks[i].weight || 100;
+        const task_name = tasks[i].name;
+        const max_score = tasks[i].weight || 100;
         if (task_scores[task_name] !== undefined) {
             taskCell.innerHTML = `${task_scores[task_name]}/${max_score}`;
         } else {
@@ -52,7 +52,7 @@ function create_player_row(player_name, player_score, tasks, task_scores_str) {
         }
     }
 
-    var scoreCell = row.insertCell(tasks.length + 1);
+    const scoreCell = row.insertCell(tasks.length + 1);
     scoreCell.innerHTML = player_score;
 }
 
@@ -64,8 +64,8 @@ function create_player_row(player_name, player_score, tasks, task_scores_str) {
 function addPlayers(players, tasks) {
     console.log('online', players);
     
-    for (let i = 0; i < players.length; i++) {
-        let playerRow = players[i].split(', ');
+    for (const player of players) {
+        const playerRow = player.split(', ');
         create_player_row(playerRow[0], playerRow[1], tasks, playerRow.slice(2).join(', '));
     }
 }
@@ -95,6 +95,7 @@ function refreshData() {
  * Update task scores (placeholder function)
  */
 function updateTaskScores() {
+    // Placeholder function - implement as needed
 }
 
 /**
@@ -304,10 +305,10 @@ document.addEventListener('DOMContentLoaded', function() {
     populateFontSelector();
     populateThemeSelector();
     
-    if (interval_timer == ""){
+    if (interval_timer === "") {
         interval_timer = setInterval(function() {
             refreshData();
-        }, 5000)
+        }, 5000);
     }
     refreshData();
 });
