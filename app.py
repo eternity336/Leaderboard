@@ -147,10 +147,10 @@ def parse_player_data(player_data):
     task_scores = {}
 
     for task in tasks:
-        task_name = task['name']
+        task_name = task['name'].lower()  # Normalize task name to lowercase
         score = 0
 
-        # Check for exact match first
+        # Check for exact match first (case-insensitive)
         if task_name in player_data:
             score = int(player_data[task_name])
 
