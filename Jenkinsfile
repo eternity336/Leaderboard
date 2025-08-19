@@ -29,7 +29,7 @@ pipeline {
                                 echo "--> Pulling latest changes from Git..."
                                 git pull origin main
                                 echo "--> Running Docker Compose..."
-                                docker-compose up -d --build
+                                docker-compose up -d --build --no-cache
                                 echo "--> Deployment complete!"
                             '''
                         """
