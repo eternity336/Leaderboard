@@ -80,7 +80,7 @@ function refreshData() {
     }).done(function(data) {
         console.log('Received Data:', data);  
         delTable('players');
-        if (data.data && data.data.tasks) {
+        if (data?.data.tasks) {
             tasks = data.data.tasks;
         }
         addPlayers(data.data.players, tasks);
@@ -135,8 +135,6 @@ function loadFont(fontName) {
         fontStyle.id = 'dynamic-font';
         fontStyle.setAttribute('data-font', fontName);
         
-        const fontFile = fontName + '.ttf';
-        
         fontStyle.textContent = `
             @font-face {
                 font-family: 'ConfigFont';
@@ -163,7 +161,7 @@ function populateFontSelector() {
             // Clear existing options except the default
             fontSelect.innerHTML = '<option value="">Default Font</option>';
             
-            if (data && data.fonts && Array.isArray(data.fonts)) {
+            if (data?.fonts && Array.isArray(data.fonts)) {
                 data.fonts.forEach(font => {
                     const option = document.createElement('option');
                     option.value = font;
@@ -203,7 +201,7 @@ function populateThemeSelector() {
         url: "/getthemes",
         type: 'GET',
         success: function(data) {
-            if (data && data.themes && Array.isArray(data.themes)) {
+            if (data?.themes && Array.isArray(data.themes)) {
                 data.themes.forEach(theme => {
                     const existingThemes = defaultThemes.map(t => t.value);
                     if (!existingThemes.includes(theme)) {
@@ -303,7 +301,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Populate font and theme selectors
     populateFontSelector();
-    populateTheme,selector();
+    populateTheme.selector();
     
     if (interval_timer === "") {
         interval_timer = setInterval(function() {
