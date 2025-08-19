@@ -18,19 +18,21 @@ pipeline {
 
         stage('Deploy to Remote Server') {
             steps {
-                // Use the SSH Agent plugin to securely connect to the remote server
-                sshagent(credentials: ['6f7c3ac0-e049-4e40-b41e-41e70fbaa734']) {
+                sshagent(credentials: ['6f7c3ac0-e049-4e40-b41e-41e70fbaa73']) { 
                     script {
-                        // Execute deployment commands on the remote server
                         sh """
-                            ssh -o StrictHostKeyChecking=no ${REMOTE_SERVER} '''
+                            ssh -o StrictHostKeyChecking=no jochsankehl@192.168.200.40 '''
+                                # Exit immediately if a command fails
+                                set -e
                                 echo "--> Connected to remote server"
-                                cd ${DEPLOY_PATH}
+                                cd /opt/jenkins/Leaderboard
                                 echo "--> Pulling latest changes from Git..."
                                 git pull origin main
-                                echo "--> Running Docker Compose..."
+                                echo "--> Stopping and removing old containers..."
+                                docker-compose down
+                                echo "--> Building and starting new containers..."
                                 docker-compose up -d --build
-                                echo "--> Deployment complete!"
+                                echo "--> Deployment complete! 🚀"
                             '''
                         """
                     }
