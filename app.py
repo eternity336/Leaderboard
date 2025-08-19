@@ -158,7 +158,6 @@ def update_players():
     resp = jsonify(message)
     return resp
 
-
 def extract_second_value(item):
     """Extract the second value from a comma-separated string.
 
