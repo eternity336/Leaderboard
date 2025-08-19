@@ -239,7 +239,7 @@ function changeFont() {
         fontStyle.textContent = `
             @font-face {
                 font-family: 'SelectedFont';
-                src: url('/static/styles/fonts/${selectedFont}.ttf') format('truetype');
+                src: url('/static/styles/fonts/${selectedFont}') format('truetype');
             }
             html, body {
                 font-family: 'SelectedFont', sans-serif !important;
