@@ -10,14 +10,12 @@ try:
         config = yaml.safe_load(config_file)
         tasks = config.get('leaderboard', {}).get('tasks', [])
         display_name_field = "name"
-        score_fields = [task['name'] for task in tasks]
         font = config.get('leaderboard', {}).get('font', '')
         theme = config.get('leaderboard', {}).get('theme', 'matrix')
 except FileNotFoundError:
     print("config.yaml not found. Using default configuration.")
     tasks = []
     display_name_field = "name"
-    score_fields = []
     font = ''
     theme = 'matrix'
 
@@ -106,49 +104,36 @@ def update_players():
     new_players = request.get_json()
     if not isinstance(new_players, list):
         return jsonify({'error': 'Expected a list of players'}), 400
+
     for player_data in new_players:
         if display_name_field not in player_data:
             continue
+
         player_name = player_data[display_name_field]
         task_scores = {}
         total_score = 0
-        for i, task in enumerate(tasks):
-            task_name = task['name']
+
+        for task in tasks:
+            task_name = task['name'].lower()
             score = 0
-            
-            # Check if the task name exists in player_data (case-insensitive)
-            found_task_key = None
-            for key in player_data:
-                if key.lower() == task_name.lower():
-                    found_task_key = key
+
+            # Normalize player data keys to lowercase for matching
+            for key, value in player_data.items():
+                if key.lower() == task_name:
+                    score = int(value)
                     break
-            
-            if found_task_key:
-                score = int(player_data[found_task_key])
-            elif len(score_fields) > i and score_fields[i] in player_data:
-                score = int(player_data[score_fields[i]])
-            else:
-                score = 0
 
             max_score = task.get('weight', float('inf'))
             capped_score = min(score, max_score)
-
             capped_score = max(capped_score, 0)
 
             task_scores[task_name] = capped_score
             total_score += capped_score
 
-        player_found = False
-        for i, player in enumerate(players):
-            if player.startswith(f"{player_name},"):
-                score_parts = [f"{task_name}:{task_scores[task_name]}" for task_name in task_scores]
-                players[i] = f"{player_name}, {int(total_score)}, {','.join(score_parts)}"
-                player_found = True
-                break
+        if update_player_in_list(players, player_name, task_scores):
+            continue
 
-        if not player_found:
-            score_parts = [f"{task_name}:{task_scores[task_name]}" for task_name in task_scores]
-            players.append(f"{player_name}, {int(total_score)}, {','.join(score_parts)}")
+        add_new_player(players, player_name, task_scores, total_score)
 
     message = {
         'status': 200,
@@ -157,6 +142,41 @@ def update_players():
     }
     resp = jsonify(message)
     return resp
+
+
+def update_player_in_list(players, player_name, task_scores):
+    """Update an existing player in the list.
+
+    Args:
+        players (list): List of players.
+        player_name (str): Player name.
+        task_scores (dict): Task scores.
+
+    Returns:
+        bool: True if player was found and updated, False otherwise.
+    """
+    for i, player in enumerate(players):
+        if player.startswith(f"{player_name},"):
+            score_parts = [f"{task_name}:{task_scores[task_name]}" for task_name in task_scores]
+            players[i] = f"{player_name}, {int(sum(task_scores.values()))}, {','.join(score_parts)}"
+            return True
+    return False
+
+
+def add_new_player(players, player_name, task_scores, total_score):
+    """Add a new player to the list.
+
+    Args:
+        players (list): List of players.
+        player_name (str): Player name.
+        task_scores (dict): Task scores.
+        total_score (int): Total score.
+
+    Returns:
+        None
+    """
+    score_parts = [f"{task_name}:{task_scores[task_name]}" for task_name in task_scores]
+    players.append(f"{player_name}, {int(total_score)}, {','.join(score_parts)}")
 
 
 def extract_second_value(item):
