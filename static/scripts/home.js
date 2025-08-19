@@ -63,6 +63,7 @@ function create_player_row(player_name, player_score, tasks, task_scores_str) {
  */
 function addPlayers(players, tasks) {
     console.log('online', players);
+    
     for (let i = 0; i < players.length; i++) {
         let playerRow = players[i].split(', ');
         create_player_row(playerRow[0], playerRow[1], tasks, playerRow.slice(2).join(', '));
