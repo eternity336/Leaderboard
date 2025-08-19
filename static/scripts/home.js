@@ -116,7 +116,7 @@ function loadTheme(themeName) {
         const link = document.createElement('link');
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        link.href = `/static/styles/themes/${themeName}.css`;
+        link.href = `/static/styles/themes/${themeName?.}.css`;
         link.setAttribute('data-theme', themeName);
         document.head.appendChild(link);
     }
@@ -140,7 +140,7 @@ function loadFont(fontName) {
         fontStyle.textContent = `
             @font-face {
                 font-family: 'ConfigFont';
-                src: url('/static/styles/fonts/${fontFile}') format('truetype');
+                src: url('/static/styles/fonts/${fontName?.}.ttf') format('truetype');
             }
             html, body {
                 font-family: 'ConfigFont', sans-serif !important;
@@ -218,7 +218,7 @@ function populateThemeSelector() {
             }
         },
         error: function() {
-            console.error("Failed to load themes");
+            console
         }
     });
 }
@@ -241,7 +241,7 @@ function changeFont() {
         fontStyle.textContent = `
             @font-face {
                 font-family: 'SelectedFont';
-                src: url('/static/styles/fonts/${selectedFont}') format('truetype');
+                src: url('/static/styles/fonts/${selectedFont}.ttf') format('truetype');
             }
             html, body {
                 font-family: 'SelectedFont', sans-serif !important;
