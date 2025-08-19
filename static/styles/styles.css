@@ -126,10 +126,3 @@ table.showplayerstable thead th {
 .theme-dropdown {
   margin-bottom: 0;
 }
-
-/* Initially hide the dropdowns */
-.font-dropdown,
-.theme-dropdown {
-  opacity: 0;
-  visibility: hidden;
-}
