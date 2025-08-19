@@ -190,10 +190,13 @@ def update_player_in_list(players, player_name, task_scores):
     Returns:
         bool: True if player was found and updated, False otherwise.
     """
-    for i, player in enumerate(players):
-        if player.startswith(f"{player_name},"):
+    for player in players:
+        # Convert both to lowercase for case-insensitive comparison
+        if player.lower().startswith(f"{player_name.lower()},"):
             score_parts = [f"{task_name}:{task_scores[task_name]}" for task_name in task_scores]
-            players[i] = f"{player_name}, {sum(task_scores.values())}, {','.join(score_parts)}"
+            # Update the player string in the list
+            index = players.index(player)
+            players[index] = f"{player_name}, {sum(task_scores.values())}, {','.join(score_parts)}"
             return True
     return False
 
