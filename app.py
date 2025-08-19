@@ -106,49 +106,23 @@ def update_players():
     new_players = request.get_json()
     if not isinstance(new_players, list):
         return jsonify({'error': 'Expected a list of players'}), 400
+
+    updated_players = []
+
     for player_data in new_players:
-        if display_name_field not in player_data:
+        parsed_player = parse_player_data(player_data)
+        if not parsed_player:
             continue
-        player_name = player_data[display_name_field]
-        task_scores = {}
-        total_score = 0
-        for i, task in enumerate(tasks):
-            task_name = task['name']
-            score = 0
-            
-            # Check if the task name exists in player_data (case-insensitive)
-            found_task_key = None
-            for key in player_data:
-                if key.lower() == task_name.lower():
-                    found_task_key = key
-                    break
-            
-            if found_task_key:
-                score = int(player_data[found_task_key])
-            elif len(score_fields) > i and score_fields[i] in player_data:
-                score = int(player_data[score_fields[i]])
-            else:
-                score = 0
 
-            max_score = task.get('weight', float('inf'))
-            capped_score = min(score, max_score)
+        player_name, task_scores = parsed_player
+        total_score = sum(calculate_task_score(task, task_scores) for task in tasks)
 
-            capped_score = max(capped_score, 0)
-
-            task_scores[task_name] = capped_score
-            total_score += capped_score
-
-        player_found = False
-        for i, player in enumerate(players):
-            if player.startswith(f"{player_name},"):
-                score_parts = [f"{task_name}:{task_scores[task_name]}" for task_name in task_scores]
-                players[i] = f"{player_name}, {int(total_score)}, {','.join(score_parts)}"
-                player_found = True
-                break
-
-        if not player_found:
-            score_parts = [f"{task_name}:{task_scores[task_name]}" for task_name in task_scores]
-            players.append(f"{player_name}, {int(total_score)}, {','.join(score_parts)}")
+        if update_player_in_list(players, player_name, task_scores):
+            updated_players.extend(players)
+        else:
+            added_player = add_new_player(player_name, task_scores, total_score)
+            updated_players.extend(players)
+            updated_players.append(added_player)
 
     message = {
         'status': 200,
@@ -157,6 +131,92 @@ def update_players():
     }
     resp = jsonify(message)
     return resp
+
+
+def parse_player_data(player_data):
+    """Extract player name and task scores from player data.
+
+    Args:
+        player_data (dict): Player data from the request.
+
+    Returns:
+        tuple: (player_name, task_scores) or None if invalid.
+    """
+    if display_name_field not in player_data:
+        return None
+
+    player_name = player_data[display_name_field]
+    task_scores = {}
+
+    for task in tasks:
+        task_name = task['name']
+        score = 0
+
+        # Check for exact match first
+        if task_name in player_data:
+            score = int(player_data[task_name])
+        elif score_fields and task_name in score_fields:
+            if score_fields[task_name] in player_data:
+                score = int(player_data[score_fields[task_name]])
+
+        max_score = task.get('weight', float('inf'))
+        capped_score = min(score, max_score)
+        capped_score = max(capped_score, 0)
+
+        task_scores[task_name] = capped_score
+
+    return player_name, task_scores
+
+
+def calculate_task_score(task, task_scores):
+    """Calculate the capped score for a task.
+
+    Args:
+        task (dict): Task definition.
+        task_scores (dict): Player's task scores.
+
+    Returns:
+        int: Capped score for the task.
+    """
+    task_name = task['name']
+    score = task_scores.get(task_name, 0)
+    max_score = task.get('weight', float('inf'))
+    return min(max(score, 0), max_score)
+
+
+def update_player_in_list(players, player_name, task_scores):
+    """Update an existing player in the list.
+
+    Args:
+        players (list): List of players.
+        player_name (str): Player name.
+        task_scores (dict): Task scores.
+
+    Returns:
+        bool: True if player was found and updated, False otherwise.
+    """
+    for i, player in enumerate(players):
+        if player.startswith(f"{player_name},"):
+            score_parts = [f"{task_name}:{task_scores[task_name]}" for task_name in task_scores]
+            players[i] = f"{player_name}, {sum(task_scores.values())}, {','.join(score_parts)}"
+            return True
+    return False
+
+
+def add_new_player(player_name, task_scores, total_score):
+    """Add a new player to the list.
+
+    Args:
+        player_name (str): Player name.
+        task_scores (dict): Task scores.
+        total_score (int): Total score.
+
+    Returns:
+        str: Formatted player string.
+    """
+    score_parts = [f"{task_name}:{task_scores[task_name]}" for task_name in task_scores]
+    return f"{player_name}, {total_score}, {','.join(score_parts)}"
+
 
 def extract_second_value(item):
     """Extract the second value from a comma-separated string.
