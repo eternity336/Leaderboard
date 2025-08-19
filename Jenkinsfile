@@ -19,7 +19,7 @@ pipeline {
         stage('Deploy to Remote Server') {
             steps {
                 // Use the SSH Agent plugin to securely connect to the remote server
-                sshagent(credentials: ['Ollama Server']) {
+                sshagent(credentials: ['6f7c3ac0-e049-4e40-b41e-41e70fbaa734']) {
                     script {
                         // Execute deployment commands on the remote server
                         sh """
