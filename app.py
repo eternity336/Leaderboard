@@ -10,14 +10,12 @@ try:
         config = yaml.safe_load(config_file)
         tasks = config.get('leaderboard', {}).get('tasks', [])
         display_name_field = "name"
-        score_fields = [task['name'] for task in tasks]
         font = config.get('leaderboard', {}).get('font', '')
         theme = config.get('leaderboard', {}).get('theme', 'matrix')
 except FileNotFoundError:
     print("config.yaml not found. Using default configuration.")
     tasks = []
     display_name_field = "name"
-    score_fields = []
     font = ''
     theme = 'matrix'
 
@@ -155,9 +153,6 @@ def parse_player_data(player_data):
         # Check for exact match first
         if task_name in player_data:
             score = int(player_data[task_name])
-        elif score_fields and task_name in score_fields:
-            if score_fields[task_name] in player_data:
-                score = int(player_data[score_fields[task_name]])
 
         max_score = task.get('weight', float('inf'))
         capped_score = min(score, max_score)
