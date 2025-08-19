@@ -165,7 +165,7 @@ function populateFontSelector() {
                 data.fonts.forEach(font => {
                     const option = document.createElement('option');
                     option.value = font;
-                    option.textContent = font.replace('.ttf', '').replace('.otf', '');
+                    option.textContent = font.replace('.ttf', '');
                     fontSelect.appendChild(option);
                 });
             } else {
@@ -301,7 +301,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Populate font and theme selectors
     populateFontSelector();
-    populateTheme.selector();
+    populateThemeSelector();
     
     if (interval_timer === "") {
         interval_timer = setInterval(function() {
