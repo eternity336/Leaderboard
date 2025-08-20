@@ -49,6 +49,7 @@ function create_player_row(player_name, player_score, tasks, task_scores_str) {
 
         let score = 0;
         for (const [key, value] of Object.entries(task_scores)) {
+            console.log("Debug", key, value);
             if (key.toLowerCase() === lowercase_task_name) {
                 score = parseInt(value);
                 break;
