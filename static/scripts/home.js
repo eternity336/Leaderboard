@@ -45,11 +45,17 @@ function create_player_row(player_name, player_score, tasks, task_scores_str) {
         taskCell.id = `task-${player_name}-${i}`;
         const task_name = tasks[i].name;
         const max_score = tasks[i].weight || 100;
-        if (task_scores[task_name] !== undefined) {
-            taskCell.innerHTML = `${task_scores[task_name]}/${max_score}`;
-        } else {
-            taskCell.innerHTML = `0/${max_score}`;
+        const lowercase_task_name = task_name.toLowerCase();
+
+        let score = 0;
+        for (const [key, value] of Object.entries(task_scores)) {
+            if (key.toLowerCase() === lowercase_task_name) {
+                score = parseInt(value);
+                break;
+            }
         }
+
+        taskCell.innerHTML = `${score}/${max_score}`;
     }
 
     const scoreCell = row.insertCell(tasks.length + 1);
