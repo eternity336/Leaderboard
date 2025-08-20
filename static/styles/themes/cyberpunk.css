@@ -1,6 +1,6 @@
 /* Cyberpunk Theme */
 html {
-  font-family: cyberpunk;
+  font-family: cyberpunk, sans-serif;
   font-size: 40px;
   background-color: #000000;
   text-shadow: 0px 0px 10px #ffffff;
