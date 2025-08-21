@@ -68,7 +68,10 @@ class TestLeaderboardApplication(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
 
         # Check if JavaScript functions are defined
-        self.assertIn('create_player_row', response.data.decode())
-        self.assertIn('refreshData', response.data.decode())
-        self.assertIn('changeFont', response.data.decode())
-        self.assertIn('changeTheme', response.data.decode())
+        html_content = response.data.decode()
+        
+        # Check for function definitions in the HTML
+        self.assertIn('function create_player_row', html_content)
+        self.assertIn('function refreshData', html_content)
+        self.assertIn('function changeFont', html_content)
+        self.assertIn('function changeTheme', html_content)
