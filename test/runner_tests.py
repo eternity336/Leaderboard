@@ -5,6 +5,7 @@ import time
 import os
 import yaml
 from app import app  # Import the Flask application
+from app import sorted_list_of_players  # Import the function used in tests
 
 class TestLeaderboardApplication(unittest.TestCase):
     def setUp(self):
