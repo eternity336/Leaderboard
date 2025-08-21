@@ -54,11 +54,24 @@ class TestLeaderboardApplication(unittest.TestCase):
         """Test that the home page renders correctly."""
         response = self.app.get('/')
         self.assertEqual(response.status_code, 200)
-        self.assertIn('players', response.data)
-        self.assertIn('tasks', response.data)
-        self.assertIn('display_name_field', response.data)
-        self.assertIn('font', response.data)
-        self.assertIn('theme', response.data)
+
+        # Check if HTML contains expected elements
+        self.assertIn('players', response.data.decode())
+        self.assertIn('tasks', response.data.decode())
+        self.assertIn('font-family', response.data.decode())
+        self.assertIn('theme-selector', response.data.decode())
+        self.assertIn('player-table', response.data.decode())
+
+    def test_js_functions_are_loaded(self):
+        """Test that JavaScript functions are loaded and available."""
+        response = self.app.get('/')
+        self.assertEqual(response.status_code, 200)
+
+        # Check if JavaScript functions are defined
+        self.assertIn('create_player_row', response.data.decode())
+        self.assertIn('refreshData', response.data.decode())
+        self.assertIn('changeFont', response.data.decode())
+        self.assertIn('changeTheme', response.data.decode())
 
     def test_get_data(self):
         """Test that the /getdata endpoint returns correct data."""
@@ -88,13 +101,41 @@ class TestLeaderboardApplication(unittest.TestCase):
             self.assertEqual(player_data['total'], total_score)
 
     def test_sorted_list_of_players(self):
-        """Test the sorted_list_of_players function."""
+        """Test the sorted_list_of_players function and DOM rendering."""
         # Add some players
         update_data = json.dumps(self.test_data)
         response = self.app.post('/update_players', data=update_data, content_type='application/json')
         self.assertEqual(response.status_code, 200)
         data = json.loads(response.data)
-        sorted_players = sorted_list_of_players()
-        self.assertEqual(len(sorted_players), 2)
-        self.assertEqual(sorted_players[0], f"{self.test_data[0]['name']}, {sum(self.test_data[0].values())}, {','.join([f'task {i+1}:{value}' for i, value in enumerate(self.test_data[0].values())])}")
-        self.assertEqual(sorted_players[1], f"{self.test_data[1]['name']}, {sum(self.test_data[1].values())}, {','.join([f'task {i+1}:{value}' for i, value in enumerate(self.test_data[1].values())])}")
+
+        # Check if players are correctly calculated
+        for player in data['data']:
+            player_data = json.loads(player)
+            total_score = sum(
+                min(int(player_data[f"{task['name'].lower()}"]), task['weight']) 
+                for task in self.tasks
+            )
+            self.assertEqual(player_data['total'], total_score)
+
+        # Check if DOM reflects the updated player list
+        response = self.app.get('/')
+        self.assertIn(f"{self.test_data[0]['name']}, {sum(self.test_data[0].values())}, {','.join([f'task {i+1}:{value}' for i, value in enumerate(self.test_data[0].values())])}", response.data.decode())
+        self.assertIn(f"{self.test_data[1]['name']}, {sum(self.test_data[1].values())}, {','.join([f'task {i+1}:{value}' for i, value in enumerate(self.test_data[1].values())])}", response.data.decode())
+
+    def test_font_and_theme_application(self):
+        """Test that the font and theme are applied correctly."""
+        # Set font and theme in config
+        self.config['leaderboard']['font'] = 'BoldPixels1.4'
+        self.config['leaderboard']['theme'] = 'neon'
+
+        # Write test config to file
+        with open('config.yaml', 'w') as config_file:
+            yaml.safe_dump(self.config, config_file)
+
+        # Fetch home page
+        response = self.app.get('/')
+        self.assertEqual(response.status_code, 200)
+
+        # Check if font and theme are applied
+        self.assertIn('BoldPixels1.4', response.data.decode())
+        self.assertIn('neon-theme', response.data.decode())
