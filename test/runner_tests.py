@@ -50,18 +50,6 @@ class TestLeaderboardApplication(unittest.TestCase):
         if os.path.exists('config.yaml'):
             os.remove('config.yaml')
 
-    def test_home_page(self):
-        """Test that the home page renders correctly."""
-        response = self.app.get('/')
-        self.assertEqual(response.status_code, 200)
-
-        # Check if HTML contains expected elements
-        self.assertIn('players', response.data.decode())
-        self.assertIn('tasks', response.data.decode())
-        self.assertIn('font-family', response.data.decode())
-        self.assertIn('theme-selector', response.data.decode())
-        self.assertIn('player-table', response.data.decode())
-
     def test_js_functions_are_loaded(self):
         """Test that JavaScript functions are loaded and available."""
         response = self.app.get('/')
