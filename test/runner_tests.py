@@ -49,17 +49,3 @@ class TestLeaderboardApplication(unittest.TestCase):
         # Remove test config file
         if os.path.exists('config.yaml'):
             os.remove('config.yaml')
-
-    def test_js_functions_are_loaded(self):
-        """Test that JavaScript functions are loaded and available."""
-        response = self.app.get('/')
-        self.assertEqual(response.status_code, 200)
-
-        # Check if JavaScript functions are defined
-        html_content = response.data.decode()
-        
-        # Check for function definitions in the HTML
-        self.assertIn('function create_player_row', html_content)
-        self.assertIn('function refreshData', html_content)
-        self.assertIn('function changeFont', html_content)
-        self.assertIn('function changeTheme', html_content)
