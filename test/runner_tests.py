@@ -71,5 +71,4 @@ class TestLeaderboardApplication(unittest.TestCase):
         self.assertIn('create_player_row', response.data.decode())
         self.assertIn('refreshData', response.data.decode())
         self.assertIn('changeFont', response.data.decode())
-        self
-
+        self.assertIn('changeTheme', response.data.decode())
