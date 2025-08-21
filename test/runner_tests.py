@@ -4,6 +4,7 @@ import json
 import time
 import os
 import yaml
+from app import app  # Import the Flask application
 
 class TestLeaderboardApplication(unittest.TestCase):
     def setUp(self):
@@ -91,4 +92,8 @@ class TestLeaderboardApplication(unittest.TestCase):
         update_data = json.dumps(self.test_data)
         response = self.app.post('/update_players', data=update_data, content_type='application/json')
         self.assertEqual(response.status_code, 200)
-        data = json
+        data = json.loads(response.data)
+        sorted_players = sorted_list_of_players()
+        self.assertEqual(len(sorted_players), 2)
+        self.assertEqual(sorted_players[0], f"{self.test_data[0]['name']}, {sum(self.test_data[0].values())}, {','.join([f'task {i+1}:{value}' for i, value in enumerate(self.test_data[0].values())])}")
+        self.assertEqual(sorted_players[1], f"{self.test_data[1]['name']}, {sum(self.test_data[1].values())}, {','.join([f'task {i+1}:{value}' for i, value in enumerate(self.test_data[1].values())])}")
